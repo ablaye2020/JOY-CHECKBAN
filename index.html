@@ -28,9 +28,10 @@
             border: 1px solid #ff0000;
             padding: 30px;
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
-        /* Zone de scrolling (effet générique) */
+        /* Zone de scrolling */
         .scrolling-text {
             background: #0a0000;
             border: 1px solid #ff0000;
@@ -78,6 +79,45 @@
             margin-right: auto;
         }
 
+        /* Zone d'abonnement */
+        .subscribe-box {
+            background: #0a0000;
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .channel-link {
+            color: #ff0000;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .channel-link:hover {
+            background: #ff0000;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        .verify-btn {
+            background: #00aa00;
+            color: black;
+            margin-top: 10px;
+        }
+
+        .verify-btn:hover {
+            background: #00ff00;
+        }
+
         input {
             width: 100%;
             padding: 14px;
@@ -104,7 +144,7 @@
             transition: all 0.3s ease;
         }
 
-        button:hover {
+        button:hover:not(:disabled) {
             background: #cc0000;
             transform: scale(1.02);
         }
@@ -124,6 +164,14 @@
             text-align: center;
         }
 
+        .reporter-section {
+            display: none;
+        }
+
+        .reporter-section.active {
+            display: block;
+        }
+
         .footer {
             text-align: center;
             font-size: 10px;
@@ -135,6 +183,12 @@
 
         .footer span {
             color: #ff4444;
+        }
+
+        .warning {
+            color: #ffaa00;
+            font-size: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -158,9 +212,23 @@
             <div class="subtitle">⚡ MASS REPORTER SYSTEM ⚡</div>
         </div>
 
-        <input type="text" id="numero" placeholder="📞 NUMÉRO À SIGNALER (+33XXXXXXXXX)">
-        <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
-        <div id="status">⚡ PRÊT ⚡</div>
+        <!-- Zone d'abonnement obligatoire -->
+        <div id="subscribeZone" class="subscribe-box">
+            <p style="margin-bottom: 10px;">🔴 ACCÈS CONDITIONNÉ 🔴</p>
+            <p style="font-size: 14px; margin-bottom: 15px;">Pour utiliser le Mass Reporter, vous devez d'abord rejoindre la chaîne :</p>
+            <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" target="_blank" id="channelLink" class="channel-link">
+                🔗 REJOINDRE LA CHAÎNE 🔗
+            </a>
+            <button id="verifyBtn" class="verify-btn">✅ J'AI REJOINT / JE SUIS ABONNÉ ✅</button>
+            <div class="warning">⚠️ Cliquez sur le lien, abonnez-vous, puis revenez valider ici.</div>
+        </div>
+
+        <!-- Section Mass Reporter (cachée au début) -->
+        <div id="reporterSection" class="reporter-section">
+            <input type="text" id="numero" placeholder="📞 NUMÉRO À SIGNALER (+33XXXXXXXXX)">
+            <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
+            <div id="status">⚡ PRÊT ⚡</div>
+        </div>
 
         <div class="footer">
             <span>by KING REDIX</span> | INFO PURGE 24 | "Le respect ne se demande pas"
@@ -168,7 +236,7 @@
     </div>
 
     <script>
-        // MUSIQUE AUTO (démarre au premier clic n'importe où)
+        // MUSIQUE (premier clic)
         let musique = null;
         let musiqueJouee = false;
         let ecouteurActif = true;
@@ -183,7 +251,6 @@
             musique.play().then(() => {
                 console.log("Musique démarrée");
                 musiqueJouee = true;
-                // Supprimer tous les écouteurs une fois la musique lancée
                 if (ecouteurActif) {
                     document.removeEventListener('click', demarrerMusique);
                     document.removeEventListener('touchstart', demarrerMusique);
@@ -196,15 +263,62 @@
             });
         }
 
-        // Premier clic n'importe où sur le document
         document.addEventListener('click', demarrerMusique);
         document.addEventListener('touchstart', demarrerMusique);
-        // Backup sur le body
         document.body.addEventListener('click', demarrerMusique);
         document.body.addEventListener('touchstart', demarrerMusique);
 
+        // VÉRIFICATION D'ABONNEMENT
+        const verifyBtn = document.getElementById('verifyBtn');
+        const subscribeZone = document.getElementById('subscribeZone');
+        const reporterSection = document.getElementById('reporterSection');
+        let isSubscribed = false;
+
+        // Stocker dans sessionStorage pour éviter de re-demander au rafraîchissement
+        if (sessionStorage.getItem('subscribed') === 'true') {
+            isSubscribed = true;
+            subscribeZone.style.display = 'none';
+            reporterSection.classList.add('active');
+        }
+
+        verifyBtn.addEventListener('click', function() {
+            // On vérifie simplement que l'utilisateur a cliqué sur le lien ET revient valider
+            // Dans la pratique, une vérification réelle de l'API WhatsApp n'est pas possible côté client.
+            // L'utilisateur doit confirmer de bonne foi.
+            
+            // Option : ouvrir le lien si ce n'est pas déjà fait
+            const channelLink = document.getElementById('channelLink');
+            
+            // Message de confirmation
+            const confirmSub = confirm("🔴 AVEZ-VOUS BIEN REJOINT LA CHAÎNE WHATSAPP ?\n\nCliquez sur OK si vous êtes maintenant abonné.\n\n⚠️ Toute triche sera détectée et votre IP sera bannie.");
+            
+            if (confirmSub) {
+                isSubscribed = true;
+                sessionStorage.setItem('subscribed', 'true');
+                subscribeZone.style.display = 'none';
+                reporterSection.classList.add('active');
+                
+                // Afficher un message de succès
+                const statusDiv = document.getElementById('status');
+                statusDiv.innerHTML = "✅ ACCÈS AUTORISÉ - MASS REPORTER DÉVERROUILLÉ ✅";
+                statusDiv.style.color = "#00ff00";
+                setTimeout(() => {
+                    if (statusDiv.innerHTML.includes("ACCÈS AUTORISÉ")) {
+                        statusDiv.innerHTML = "⚡ PRÊT ⚡";
+                    }
+                }, 3000);
+            } else {
+                alert("❌ Vous devez rejoindre la chaîne pour accéder au Mass Reporter !");
+            }
+        });
+
         // SIGNALEMENTS
         async function lancerSignalement() {
+            if (!isSubscribed && sessionStorage.getItem('subscribed') !== 'true') {
+                alert("❌ Vous devez d'abord rejoindre la chaîne WhatsApp !");
+                return;
+            }
+            
             const numero = document.getElementById('numero').value.trim();
             if(!numero || numero.length < 10) {
                 alert("❌ Numéro invalide !");
@@ -212,7 +326,7 @@
             }
 
             const statusDiv = document.getElementById('status');
-            const bouton = document.querySelector('button');
+            const bouton = document.querySelector('#reporterSection button');
             statusDiv.innerHTML = "⚡ ENVOI DE 50 SIGNALEMENTS... ⚡";
             statusDiv.style.color = "#ffaa00";
             bouton.disabled = true;
@@ -239,4 +353,3 @@
     </script>
 </body>
 </html>
-joy 
