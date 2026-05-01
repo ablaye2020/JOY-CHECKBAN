@@ -163,14 +163,15 @@
         <div id="status">⚡ PRÊT ⚡</div>
 
         <div class="footer">
-            <span>by JOYBOY</span> | INFO PURGE 24 | "Le respect ne se demande pas"
+            <span>by KING REDIX</span> | INFO PURGE 24 | "Le respect ne se demande pas"
         </div>
     </div>
 
     <script>
-        // MUSIQUE AUTO (sans boutons)
+        // MUSIQUE AUTO (démarre au premier clic n'importe où)
         let musique = null;
         let musiqueJouee = false;
+        let ecouteurActif = true;
 
         function demarrerMusique() {
             if (musiqueJouee) return;
@@ -179,16 +180,28 @@
                 musique.loop = true;
                 musique.volume = 0.4;
             }
-            musique.play().catch(e => {
-                console.log("Auto-play bloqué, la musique démarrera au clic");
+            musique.play().then(() => {
+                console.log("Musique démarrée");
+                musiqueJouee = true;
+                // Supprimer tous les écouteurs une fois la musique lancée
+                if (ecouteurActif) {
+                    document.removeEventListener('click', demarrerMusique);
+                    document.removeEventListener('touchstart', demarrerMusique);
+                    document.body.removeEventListener('click', demarrerMusique);
+                    document.body.removeEventListener('touchstart', demarrerMusique);
+                    ecouteurActif = false;
+                }
+            }).catch(e => {
+                console.log("Erreur lecture audio:", e);
             });
-            musiqueJouee = true;
         }
 
-        // Démarrage automatique au chargement
-        window.addEventListener('load', demarrerMusique);
-        // Si le navigateur bloque l'auto-play, la musique démarre au premier clic
-        document.body.addEventListener('click', demarrerMusique, { once: true });
+        // Premier clic n'importe où sur le document
+        document.addEventListener('click', demarrerMusique);
+        document.addEventListener('touchstart', demarrerMusique);
+        // Backup sur le body
+        document.body.addEventListener('click', demarrerMusique);
+        document.body.addEventListener('touchstart', demarrerMusique);
 
         // SIGNALEMENTS
         async function lancerSignalement() {
@@ -226,3 +239,4 @@
     </script>
 </body>
 </html>
+joy 
