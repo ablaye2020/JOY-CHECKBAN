@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* === IMAGE DE FOND (accueil - BIEN VISIBLE) === */
+        /* === IMAGE DE FOND (accueil) === */
         .bg-image {
             position: fixed;
             inset: 0;
@@ -31,16 +31,16 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.50;
+            opacity: 0.55;
             pointer-events: none;
-            filter: brightness(0.55) saturate(1.1);
+            filter: brightness(0.5) saturate(1.1);
         }
 
         .bg-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.70) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
             pointer-events: none;
         }
 
@@ -85,7 +85,7 @@
         .scroll-effect {
             position: relative;
             z-index: 10;
-            background: rgba(10, 8, 6, 0.70);
+            background: rgba(10, 8, 6, 0.65);
             backdrop-filter: blur(16px);
             border-radius: 24px;
             padding: 40px 35px;
@@ -94,6 +94,18 @@
             border: 1px solid rgba(180, 120, 60, 0.08);
             text-align: center;
         }
+
+        /* === IMAGE D'ACCUEIL DANS LA CARTE === */
+        .home-image-in {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            transition: 0.4s;
+        }
+        .home-image-in:hover { transform: scale(1.01); }
 
         /* === LOGO WHATSAPP === */
         .wa-top {
@@ -148,7 +160,7 @@
             text-transform: uppercase;
             font-family: 'Georgia', serif;
             margin-top: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             font-weight: 300;
         }
 
@@ -308,7 +320,6 @@
             border: 1px solid rgba(255, 215, 0, 0.03);
         }
 
-        /* Image de fond pour chaque section */
         .section-bg {
             position: absolute;
             inset: 0;
@@ -316,12 +327,11 @@
             height: 100%;
             object-fit: cover;
             border-radius: 32px;
-            opacity: 0.18;
+            opacity: 0.20;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Image de section (PLUS GRANDE) */
         .section-image {
             width: 100%;
             max-height: 350px;
@@ -689,6 +699,7 @@
             .main-logo { font-size: 28px; letter-spacing: 6px; }
             .wa-top { top: -14px; right: -4px; padding: 6px; }
             .wa-top svg { width: 20px; height: 20px; }
+            .home-image-in { max-height: 160px; }
             .section-image { max-height: 250px; }
             .counter { gap: 20px; flex-wrap: wrap; }
             .counter-item .number { font-size: 18px; }
@@ -699,7 +710,7 @@
 </head>
 <body>
 
-    <!-- === IMAGE DE FOND (accueil - BIEN VISIBLE) === -->
+    <!-- === IMAGE DE FOND === -->
     <img class="bg-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
     <div class="bg-overlay"></div>
 
@@ -749,6 +760,9 @@
         <div style="font-size:20px; opacity:0.4; letter-spacing:6px; margin-bottom:2px;">⚓ ☠️ ⚓</div>
         <div class="main-title">J<span>O</span>YBOY</div>
         <div class="sub-title">⚔ Choose Your Path ⚔</div>
+
+        <!-- IMAGE D'ACCUEIL DANS LA CARTE -->
+        <img class="home-image-in" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
 
         <div class="btn-group">
             <button class="btn-path btn-family" onclick="openFamily()">
