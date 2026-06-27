@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* === IMAGE DE FOND (globale) === */
+        /* === IMAGE DE FOND (accueil) === */
         .bg-image {
             position: fixed;
             inset: 0;
@@ -31,7 +31,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.35;
+            opacity: 0.30;
             pointer-events: none;
             filter: brightness(0.5) saturate(1.1);
         }
@@ -92,11 +92,10 @@
             max-width: 560px;
             width: 100%;
             border: 1px solid rgba(180, 120, 60, 0.10);
-            box-shadow: 0 0 80px rgba(180, 120, 60, 0.02);
             text-align: center;
         }
 
-        /* === LOGO WHATSAPP EN HAUT À DROITE === */
+        /* === LOGO WHATSAPP === */
         .wa-top {
             position: absolute;
             top: -18px;
@@ -105,7 +104,6 @@
             border-radius: 50%;
             padding: 10px;
             border: 2px solid rgba(37, 211, 102, 0.10);
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.05);
             animation: waFloat 3s ease-in-out infinite;
         }
 
@@ -128,11 +126,11 @@
             font-weight: 900;
             letter-spacing: 12px;
             color: #ffd700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.10), 0 4px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
             font-family: 'Georgia', serif;
             margin-bottom: 2px;
         }
-        .main-title span { color: #ff2200; text-shadow: 0 0 50px rgba(255, 34, 0, 0.12); }
+        .main-title span { color: #ff2200; }
 
         .main-title::after {
             content: '';
@@ -154,29 +152,6 @@
             font-weight: 300;
         }
 
-        .pirate-icon {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 2px;
-            opacity: 0.4;
-            letter-spacing: 6px;
-        }
-
-        /* === IMAGE D'ACCUEIL (PLUS GRANDE) === */
-        .home-image {
-            width: 100%;
-            max-height: 280px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255, 215, 0, 0.05);
-            transition: 0.4s;
-        }
-        .home-image:hover {
-            transform: scale(1.01);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.04);
-        }
-
         /* === BOUTONS === */
         .btn-group {
             display: flex;
@@ -195,8 +170,6 @@
             transition: all 0.4s ease;
             font-family: 'Georgia', serif;
             letter-spacing: 4px;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-family {
@@ -208,7 +181,6 @@
             transform: scale(1.02);
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.06);
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.04));
-            border-color: rgba(255, 215, 0, 0.20);
         }
 
         .btn-fans {
@@ -220,12 +192,11 @@
             transform: scale(1.02);
             box-shadow: 0 0 50px rgba(255, 34, 0, 0.06);
             background: linear-gradient(135deg, rgba(255, 34, 0, 0.15), rgba(255, 34, 0, 0.04));
-            border-color: rgba(255, 34, 0, 0.20);
         }
 
         .btn-path .icon { margin-right: 10px; }
 
-        /* === COMPTEUR DE VISITEURS === */
+        /* === COMPTEURS === */
         .counter {
             display: flex;
             justify-content: center;
@@ -258,7 +229,7 @@
 
         .counter-item.fans-counter .number { color: #ff4444; }
 
-        /* === PIED DE PAGE === */
+        /* === PIED === */
         .footer {
             margin-top: 16px;
             padding-top: 12px;
@@ -296,10 +267,7 @@
             justify-content: center;
             backdrop-filter: blur(8px);
         }
-        .sound-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: scale(1.05);
-        }
+        .sound-btn:hover { background: rgba(255, 255, 255, 0.08); transform: scale(1.05); }
         .sound-btn.active { color: #25D366; border-color: rgba(37, 211, 102, 0.10); }
 
         /* === BOUTON RETOUR === */
@@ -322,10 +290,7 @@
             justify-content: center;
             backdrop-filter: blur(8px);
         }
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: scale(1.05);
-        }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.08); transform: scale(1.05); }
         .back-btn.visible { display: flex; }
 
         /* === MAIN CONTENT === */
@@ -351,14 +316,15 @@
             height: 100%;
             object-fit: cover;
             border-radius: 32px;
-            opacity: 0.15;
+            opacity: 0.12;
             z-index: 0;
             pointer-events: none;
         }
 
+        /* Image de section (pleine largeur) */
         .section-image {
             width: 100%;
-            max-height: 250px;
+            max-height: 280px;
             object-fit: cover;
             border-radius: 16px;
             margin-bottom: 14px;
@@ -626,6 +592,92 @@
             z-index: 2;
         }
 
+        /* === ACCESS OVERLAY (pour le code d'accès) === */
+        #access-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+        #access-overlay.visible { display: flex; }
+        #access-overlay.hidden { display: none; }
+
+        #access-overlay .lock-icon {
+            font-size: 45px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        #access-overlay .logo {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: 10px;
+            color: #ffd700;
+            font-family: 'Georgia', serif;
+        }
+        #access-overlay .logo span { color: #ff2200; }
+
+        #access-overlay .sub {
+            color: rgba(255, 215, 0, 0.4);
+            font-size: 13px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-family: 'Georgia', serif;
+        }
+
+        #access-overlay input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            width: 260px;
+            outline: none;
+            letter-spacing: 6px;
+            font-family: 'Georgia', serif;
+            transition: 0.3s;
+        }
+        #access-overlay input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.05);
+        }
+        #access-overlay .btn-access {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            border: none;
+            padding: 14px 56px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            letter-spacing: 4px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
+            transition: 0.3s;
+        }
+        #access-overlay .btn-access:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.20);
+        }
+        #access-overlay .error-msg {
+            color: #ff4444;
+            font-size: 14px;
+            min-height: 20px;
+            font-family: 'Georgia', serif;
+        }
+
         @media (max-width: 600px) {
             .scroll-effect { padding: 28px 16px; }
             .main-title { font-size: 36px; letter-spacing: 8px; }
@@ -637,16 +689,17 @@
             .main-logo { font-size: 28px; letter-spacing: 6px; }
             .wa-top { top: -14px; right: -4px; padding: 6px; }
             .wa-top svg { width: 20px; height: 20px; }
-            .home-image { max-height: 200px; }
-            .section-image { max-height: 180px; }
+            .section-image { max-height: 200px; }
             .counter { gap: 20px; flex-wrap: wrap; }
             .counter-item .number { font-size: 18px; }
+            #access-overlay input { width: 200px; font-size: 16px; padding: 12px 16px; }
+            #access-overlay .logo { font-size: 30px; letter-spacing: 6px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- === IMAGE DE FOND === -->
+    <!-- === IMAGE DE FOND (accueil) === -->
     <img class="bg-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
     <div class="bg-overlay"></div>
 
@@ -674,24 +727,31 @@
     <!-- === BOUTON RETOUR === -->
     <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
 
+    <!-- === ACCESS OVERLAY (code d'accès) === -->
+    <div id="access-overlay">
+        <div class="lock-icon">⛔</div>
+        <div class="logo">J<span>O</span>YBOY</div>
+        <div class="sub">⚓ Family Access ⚓</div>
+        <input type="password" id="access-input" placeholder="••••••" maxlength="6" autofocus>
+        <button class="btn-access" onclick="checkAccess()">⚡ ENTER</button>
+        <div class="error-msg" id="access-error"></div>
+    </div>
+
     <!-- === ÉCRAN D'ACCUEIL === -->
     <div id="homeScreen" class="scroll-effect">
-        <!-- Logo WhatsApp en haut à droite -->
+        <!-- Logo WhatsApp -->
         <div class="wa-top">
             <svg viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
         </div>
 
-        <div class="pirate-icon">⚓ ☠️ ⚓</div>
+        <div class="pirate-icon" style="font-size:20px; opacity:0.4; letter-spacing:6px; margin-bottom:2px;">⚓ ☠️ ⚓</div>
         <div class="main-title">J<span>O</span>YBOY</div>
         <div class="sub-title">⚔ Choose Your Path ⚔</div>
 
-        <!-- Image d'accueil (plus grande) -->
-        <img class="home-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
-
         <div class="btn-group">
-            <button class="btn-path btn-family" onclick="choosePath('family')">
+            <button class="btn-path btn-family" onclick="openFamily()">
                 <span class="icon">🏠</span> FAMILY
             </button>
             <button class="btn-path btn-fans" onclick="choosePath('fans')">
@@ -699,7 +759,7 @@
             </button>
         </div>
 
-        <!-- COMPTEUR DE VISITEURS -->
+        <!-- COMPTEURS -->
         <div class="counter">
             <div class="counter-item">
                 <span class="number" id="familyCount">0</span>
@@ -718,12 +778,10 @@
 
     <!-- === MAIN CONTENT === -->
     <div id="main-content">
-        <!-- Image de fond pour la section -->
         <img class="section-bg" id="sectionBg" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="bg" onerror="this.style.display='none'">
 
         <div id="sectionBadge" class="section-badge family">🏠 FAMILY</div>
 
-        <!-- Image de section (plus grande) -->
         <img class="section-image" id="sectionImage" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="Section" onerror="this.style.display='none'">
 
         <div class="logo-wa-container">
@@ -787,7 +845,7 @@
 
     <script>
         // ============================================
-        // COMPTEUR DE VISITEURS (localStorage)
+        // COMPTEURS
         // ============================================
         function getCount(key) {
             var count = localStorage.getItem(key);
@@ -800,7 +858,6 @@
             return count;
         }
 
-        // Initialiser les compteurs
         var familyCount = getCount('joyboy_family_visits');
         var fansCount = getCount('joyboy_fans_visits');
 
@@ -808,7 +865,7 @@
         document.getElementById('fansCount').textContent = fansCount;
 
         // ============================================
-        // GESTION DU SON
+        // SON
         // ============================================
         var video = document.getElementById('bg-video');
         var audio = document.getElementById('bg-audio');
@@ -833,43 +890,59 @@
         }
 
         // ============================================
-        // CHOISIR UN CHEMIN
+        // CODE D'ACCÈS : 222200
         // ============================================
-        var currentSection = 'family';
+        function checkAccess() {
+            var input = document.getElementById('access-input');
+            var error = document.getElementById('access-error');
+            var code = input.value.trim();
 
-        function choosePath(section) {
-            currentSection = section;
-            document.getElementById('homeScreen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('backBtn').classList.add('visible');
-
-            // Incrémenter le compteur
-            if (section === 'family') {
-                var newCount = incrementCount('joyboy_family_visits');
-                document.getElementById('familyCount').textContent = newCount;
-                document.querySelector('.counter-item .number').textContent = newCount;
+            if (code === '222200') {
+                document.getElementById('access-overlay').classList.remove('visible');
+                document.getElementById('access-overlay').classList.add('hidden');
+                choosePath('family');
+                error.textContent = '';
             } else {
+                error.textContent = '❌ Code incorrect. Réessaie.';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        document.getElementById('access-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { checkAccess(); }
+        });
+
+        // ============================================
+        // OUVRIR FAMILLE (avec code)
+        // ============================================
+        function openFamily() {
+            document.getElementById('access-overlay').classList.remove('hidden');
+            document.getElementById('access-overlay').classList.add('visible');
+            document.getElementById('access-input').value = '';
+            document.getElementById('access-input').focus();
+            document.getElementById('access-error').textContent = '';
+        }
+
+        // ============================================
+        // CHOISIR FANS (sans code)
+        // ============================================
+        function choosePath(section) {
+            if (section === 'fans') {
+                currentSection = 'fans';
+                document.getElementById('homeScreen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('backBtn').classList.add('visible');
+
                 var newCount = incrementCount('joyboy_fans_visits');
                 document.getElementById('fansCount').textContent = newCount;
-            }
 
-            var badge = document.getElementById('sectionBadge');
-            var sub = document.getElementById('mainSub');
-            var status = document.getElementById('status-text');
-            var sectionImg = document.getElementById('sectionImage');
-            var sectionBg = document.getElementById('sectionBg');
+                var badge = document.getElementById('sectionBadge');
+                var sub = document.getElementById('mainSub');
+                var status = document.getElementById('status-text');
+                var sectionImg = document.getElementById('sectionImage');
+                var sectionBg = document.getElementById('sectionBg');
 
-            if (section === 'family') {
-                badge.className = 'section-badge family';
-                badge.textContent = '🏠 FAMILY';
-                sub.className = 'main-sub';
-                sub.textContent = '❤️ Protect Your Family';
-                status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.05)';
-                document.querySelector('.footer-link a').style.color = '#ffd700';
-                sectionImg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
-                sectionBg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
-            } else {
                 badge.className = 'section-badge fans';
                 badge.textContent = '🔥 FANS';
                 sub.className = 'main-sub';
@@ -879,6 +952,31 @@
                 document.querySelector('.footer-link a').style.color = '#ff4444';
                 sectionImg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
                 sectionBg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
+            } else {
+                // Family (déjà géré par le code)
+                currentSection = 'family';
+                document.getElementById('homeScreen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('backBtn').classList.add('visible');
+
+                var newCount = incrementCount('joyboy_family_visits');
+                document.getElementById('familyCount').textContent = newCount;
+
+                var badge = document.getElementById('sectionBadge');
+                var sub = document.getElementById('mainSub');
+                var status = document.getElementById('status-text');
+                var sectionImg = document.getElementById('sectionImage');
+                var sectionBg = document.getElementById('sectionBg');
+
+                badge.className = 'section-badge family';
+                badge.textContent = '🏠 FAMILY';
+                sub.className = 'main-sub';
+                sub.textContent = '❤️ Protect Your Family';
+                status.textContent = 'Fill the form and click GENERATE';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.05)';
+                document.querySelector('.footer-link a').style.color = '#ffd700';
+                sectionImg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
+                sectionBg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
             }
         }
 
@@ -886,6 +984,8 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('homeScreen').style.display = 'block';
             document.getElementById('backBtn').classList.remove('visible');
+            document.getElementById('access-overlay').classList.remove('visible');
+            document.getElementById('access-overlay').classList.add('hidden');
         }
 
         // ============================================
@@ -925,7 +1025,6 @@
 
             var violationText = violationTexts[type] || violationTexts.other;
 
-            // Messages FAMILLE
             var familyMessages = [
                 "Dear WhatsApp Support Team,\n\nI am writing to you today with a heavy heart because my family is going through something terrible. A person on WhatsApp has been sending threatening messages to my wife and children. They have been insulting them, making them feel unsafe, and even threatening to harm them. My children are scared to even open the app now. This person knows our personal information and is using it to intimidate us.\n\nI have tried blocking them but they keep creating new accounts. I've reported them before but nothing changed. I am genuinely scared for my family's safety. We are not sleeping well. My wife is stressed, my kids are anxious, and I feel helpless because I can't stop this person.\n\nI am asking you, from the bottom of my heart, to please investigate this account and ban it permanently. I have screenshots of everything — the threats, the insults, the harassment. I can share all of it if needed. Please don't let this person continue to terrorize my family.\n\nThank you for reading this. I hope you can help us find peace again.\n\nSincerely,\nA father who just wants to protect his family",
 
@@ -934,7 +1033,6 @@
                 "Dear WhatsApp Team,\n\nI am writing to file a formal complaint against a user who has been harassing my family. I am angry — not just because of what they are doing, but because I feel like WhatsApp is not doing enough to stop it.\n\nThis person has been sending threatening messages to my children. They are teenagers, and they are scared. They don't want to use WhatsApp anymore because of this person. I have tried everything: blocking, reporting, ignoring. Nothing works. They just come back with a new number or a new account.\n\nI want to know: what does it take for WhatsApp to take action? How many reports do we need to make before someone actually investigates? I have sent you screenshots, I have given you the details, and yet nothing has changed.\n\nI am not asking for much. I am asking for you to do your job. Investigate this account. Ban this person. Protect my family from this harassment. I have evidence and I am ready to share it all.\n\nPlease respond to this message with confirmation of action taken. I am not going to let this go.\n\nRegards,\nA frustrated father who has had enough"
             ];
 
-            // Messages FANS
             var fansMessages = [
                 "Dear WhatsApp Support Team,\n\nI am writing to you because my fans are being targeted by scammers on your platform. Someone is pretending to be me and asking my followers for money. They are using my name, my photos, and my reputation to trick people who trust me.\n\nThis is not just a scam — it's a betrayal. My fans have supported me through everything. They believe in me. And now, someone is using that trust to steal from them. I feel responsible. I feel like I failed them by not catching this sooner.\n\nI have received over 100 messages from fans telling me they were contacted by this impersonator. Some of them almost sent money. This is unacceptable. I need your help to shut this down immediately.\n\nI have screenshots of the impersonator's conversations. I have the account details. I am ready to share everything with you. Please investigate this account and ban it permanently. My fans deserve protection.\n\nThank you for taking this seriously.\n\nSincerely,\nA creator who stands by his fans",
 
