@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* === IMAGE DE FOND (accueil) === */
+        /* === IMAGE DE FOND (GRANDE) === */
         .bg-image {
             position: fixed;
             inset: 0;
@@ -31,16 +31,17 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.55;
+            opacity: 0.65;
             pointer-events: none;
-            filter: brightness(0.5) saturate(1.1);
+            filter: brightness(0.5) saturate(1.2);
+            transform: scale(1.02);
         }
 
         .bg-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
             pointer-events: none;
         }
 
@@ -85,27 +86,15 @@
         .scroll-effect {
             position: relative;
             z-index: 10;
-            background: rgba(10, 8, 6, 0.65);
+            background: rgba(10, 8, 6, 0.60);
             backdrop-filter: blur(16px);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 40px 35px;
-            max-width: 560px;
+            max-width: 580px;
             width: 100%;
             border: 1px solid rgba(180, 120, 60, 0.08);
             text-align: center;
         }
-
-        /* === IMAGE D'ACCUEIL DANS LA CARTE === */
-        .home-image-in {
-            width: 100%;
-            max-height: 220px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-            transition: 0.4s;
-        }
-        .home-image-in:hover { transform: scale(1.01); }
 
         /* === LOGO WHATSAPP === */
         .wa-top {
@@ -134,15 +123,15 @@
 
         /* === TITRE === */
         .main-title {
-            font-size: 50px;
+            font-size: 52px;
             font-weight: 900;
             letter-spacing: 12px;
             color: #ffd700;
-            text-shadow: 0 0 50px rgba(255, 215, 0, 0.08);
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.10);
             font-family: 'Georgia', serif;
             margin-bottom: 2px;
         }
-        .main-title span { color: #ff2200; }
+        .main-title span { color: #ff2200; text-shadow: 0 0 40px rgba(255, 34, 0, 0.15); }
 
         .main-title::after {
             content: '';
@@ -150,1008 +139,88 @@
             width: 30%;
             height: 2px;
             margin: 6px auto 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.12), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
         }
 
         .sub-title {
             color: rgba(255, 215, 0, 0.40);
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 10px;
             text-transform: uppercase;
             font-family: 'Georgia', serif;
             margin-top: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             font-weight: 300;
         }
 
-        /* === BOUTONS === */
+        /* === IMAGE D'ACCUEIL === */
+        .home-image-in {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            transition: 0.4s;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.02);
+        }
+        .home-image-in:hover { transform: scale(1.01); }
+
+        /* === BOUTONS AVEC EFFETS === */
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 6px 0 10px;
+            gap: 16px;
+            margin: 8px 0 10px;
         }
 
         .btn-path {
-            padding: 15px 26px;
+            padding: 18px 30px;
             border: none;
-            border-radius: 12px;
-            font-size: 17px;
+            border-radius: 14px;
+            font-size: 20px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.4s ease;
             font-family: 'Georgia', serif;
-            letter-spacing: 4px;
-        }
-
-        .btn-family {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.02));
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.10);
-        }
-        .btn-family:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.06);
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.04));
-        }
-
-        .btn-fans {
-            background: linear-gradient(135deg, rgba(255, 34, 0, 0.08), rgba(255, 34, 0, 0.02));
-            color: #ff4444;
-            border: 1px solid rgba(255, 34, 0, 0.10);
-        }
-        .btn-fans:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(255, 34, 0, 0.06);
-            background: linear-gradient(135deg, rgba(255, 34, 0, 0.15), rgba(255, 34, 0, 0.04));
-        }
-
-        .btn-path .icon { margin-right: 10px; }
-
-        /* === COMPTEURS === */
-        .counter {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 10px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .counter-item {
-            text-align: center;
-            font-family: 'Georgia', serif;
-        }
-
-        .counter-item .number {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffd700;
-            display: block;
-            letter-spacing: 2px;
-        }
-
-        .counter-item .label {
-            font-size: 9px;
-            text-transform: uppercase;
-            color: #555;
-            letter-spacing: 3px;
-            margin-top: 2px;
-        }
-
-        .counter-item.fans-counter .number { color: #ff4444; }
-
-        /* === PIED === */
-        .footer {
-            margin-top: 16px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            font-size: 10px;
-            color: #333;
-            letter-spacing: 2px;
-            font-family: 'Georgia', serif;
-        }
-        .footer a {
-            color: #ffd700;
-            text-decoration: none;
-            opacity: 0.20;
-            transition: 0.3s;
-        }
-        .footer a:hover { opacity: 0.50; }
-
-        /* === BOUTON SON === */
-        .sound-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            color: #aaa;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-        .sound-btn:hover { background: rgba(255, 255, 255, 0.08); transform: scale(1.05); }
-        .sound-btn.active { color: #25D366; border-color: rgba(37, 211, 102, 0.10); }
-
-        /* === BOUTON RETOUR === */
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            color: #aaa;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-        .back-btn:hover { background: rgba(255, 255, 255, 0.08); transform: scale(1.05); }
-        .back-btn.visible { display: flex; }
-
-        /* === MAIN CONTENT === */
-        #main-content {
-            display: none;
-            position: relative;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.40);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 40px 38px;
-            max-width: 720px;
-            width: 100%;
-            margin: 20px auto;
-            border: 1px solid rgba(255, 215, 0, 0.03);
-        }
-
-        .section-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 32px;
-            opacity: 0.20;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .section-image {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.03);
-            position: relative;
-            z-index: 2;
-            transition: 0.4s;
-        }
-        .section-image:hover { transform: scale(1.01); }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 20px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-family: 'Georgia', serif;
-            margin-bottom: 10px;
-            text-align: center;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
-        .section-badge.family {
-            background: rgba(255, 215, 0, 0.05);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.05);
-        }
-        .section-badge.fans {
-            background: rgba(255, 34, 0, 0.05);
-            color: #ff4444;
-            border: 1px solid rgba(255, 34, 0, 0.05);
-        }
-
-        .logo-wa-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin-bottom: 2px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .wa-icon {
-            width: 38px;
-            height: 38px;
-            fill: #25D366;
-            filter: drop-shadow(0 0 25px rgba(37, 211, 102, 0.10));
-            animation: waPulse 2.5s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes waPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-
-        .main-logo {
-            font-size: 38px;
-            font-weight: 900;
-            letter-spacing: 10px;
-            color: #ffffff;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.05);
-            text-align: center;
-            font-family: 'Georgia', serif;
-            margin-bottom: 0;
-        }
-        .main-logo span { color: #ffd700; }
-
-        .main-sub {
-            text-align: center;
-            color: #ffd700;
-            font-size: 11px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.03);
-            padding-bottom: 14px;
-            margin-bottom: 20px;
-            font-family: 'Georgia', serif;
-            opacity: 0.35;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-            text-align: left;
-            position: relative;
-            z-index: 2;
-        }
-        .form-group label {
-            color: #aaa;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 4px;
-            font-family: 'Georgia', serif;
-            text-transform: uppercase;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 14px;
-            color: #eee;
-            font-size: 14px;
-            font-family: 'Georgia', serif;
-            outline: none;
-            transition: 0.3s;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-bottom: 1px solid #ffd700;
-        }
-        .form-group select option { background: #111; color: #eee; }
-        .form-group textarea { min-height: 56px; resize: vertical; }
-
-        .generated-box {
-            background: rgba(255, 215, 0, 0.01);
-            border-radius: 12px;
-            padding: 14px 18px;
-            margin: 16px 0 18px;
-            text-align: left;
-            display: none;
-            max-height: 400px;
-            overflow-y: auto;
-            min-height: 50px;
-            border-left: 2px solid rgba(255, 215, 0, 0.05);
-            position: relative;
-            z-index: 2;
-        }
-        .generated-box.visible { display: block; }
-        .generated-box .msg-title {
-            color: #ffd700;
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            font-family: 'Georgia', serif;
-            opacity: 0.30;
-        }
-        .generated-box .msg-content {
-            color: #eee;
-            font-size: 14px;
-            line-height: 1.9;
-            white-space: pre-wrap;
-            word-break: break-word;
-            font-family: 'Georgia', serif;
-        }
-        .generated-box .cursor-blink {
-            display: inline-block;
-            width: 2px;
-            height: 17px;
-            background: #ffd700;
-            animation: blink 0.7s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .btn-group-form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-        }
-        .btn-form {
-            padding: 12px 28px;
-            border: none;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s ease;
-            letter-spacing: 1px;
-            flex: 1 1 auto;
-            min-width: 120px;
-            font-family: 'Georgia', serif;
-        }
-        .btn-generate {
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #000;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.04);
-        }
-        .btn-generate:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(255, 215, 0, 0.10); }
-        .btn-generate:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-        .btn-copy {
-            background: rgba(255, 255, 255, 0.06);
-            color: #ccc;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .btn-copy:hover { background: rgba(255, 255, 255, 0.12); transform: scale(1.03); }
-        .btn-copy:disabled { opacity: 0.3; cursor: not-allowed; }
-        .btn-whatsapp {
-            background: #25D366;
-            color: #fff;
-        }
-        .btn-whatsapp:hover { background: #1da851; transform: scale(1.03); }
-        .btn-whatsapp:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
-
-        .toast {
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.05);
-            padding: 10px 24px;
-            border-radius: 30px;
-            color: #ccc;
-            font-size: 12px;
-            z-index: 1002;
-            opacity: 0;
-            transition: 0.4s;
-            pointer-events: none;
-            font-family: 'Georgia', serif;
-        }
-        .toast.show { opacity: 1; }
-
-        .status-text {
-            color: #888;
-            font-size: 11px;
-            text-align: center;
-            margin-top: 8px;
-            font-family: 'Georgia', serif;
-            min-height: 18px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-link {
-            text-align: center;
-            margin-top: 18px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            font-family: 'Georgia', serif;
-            position: relative;
-            z-index: 2;
-        }
-        .footer-link a {
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 3px;
-            transition: 0.3s;
-            opacity: 0.15;
-        }
-        .footer-link a:hover { opacity: 0.40; }
-
-        .whatsapp-note {
-            text-align: center;
-            color: #444;
-            font-size: 10px;
-            margin-top: 6px;
-            font-family: 'Georgia', serif;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* === ACCESS OVERLAY === */
-        #access-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 20px;
-        }
-        #access-overlay.visible { display: flex; }
-        #access-overlay.hidden { display: none; }
-
-        #access-overlay .lock-icon {
-            font-size: 45px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        #access-overlay .logo {
-            font-size: 40px;
-            font-weight: 900;
-            letter-spacing: 10px;
-            color: #ffd700;
-            font-family: 'Georgia', serif;
-        }
-        #access-overlay .logo span { color: #ff2200; }
-
-        #access-overlay .sub {
-            color: rgba(255, 215, 0, 0.4);
-            font-size: 13px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            font-family: 'Georgia', serif;
-        }
-
-        #access-overlay input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: 12px;
-            padding: 14px 24px;
-            font-size: 20px;
-            color: #fff;
-            text-align: center;
-            width: 260px;
-            outline: none;
             letter-spacing: 6px;
-            font-family: 'Georgia', serif;
-            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        #access-overlay input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.05);
+
+        .btn-path .icon {
+            margin-right: 12px;
+            font-size: 22px;
         }
-        #access-overlay .btn-access {
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #000;
-            border: none;
-            padding: 14px 56px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Georgia', serif;
-            letter-spacing: 4px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
-            transition: 0.3s;
+
+        /* BOUTON FAMILY (OR) */
+        .btn-family {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.10), rgba(255, 215, 0, 0.02));
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.12);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
         }
-        #access-overlay .btn-access:hover {
+        .btn-family::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 14px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), transparent, rgba(255, 215, 0, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .btn-family:hover::before { opacity: 1; }
+        .btn-family:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.20);
-        }
-        #access-overlay .error-msg {
-            color: #ff4444;
-            font-size: 14px;
-            min-height: 20px;
-            font-family: 'Georgia', serif;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.10), inset 0 0 40px rgba(255, 215, 0, 0.02);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.04));
+            border-color: rgba(255, 215, 0, 0.25);
         }
 
-        @media (max-width: 600px) {
-            .scroll-effect { padding: 28px 16px; }
-            .main-title { font-size: 36px; letter-spacing: 8px; }
-            .sub-title { font-size: 10px; letter-spacing: 6px; }
-            .btn-path { font-size: 14px; padding: 13px 18px; }
-            .back-btn { top: 10px; left: 10px; width: 36px; height: 36px; font-size: 16px; }
-            .sound-btn { bottom: 20px; right: 20px; width: 38px; height: 38px; font-size: 16px; }
-            #main-content { padding: 24px 16px; }
-            .main-logo { font-size: 28px; letter-spacing: 6px; }
-            .wa-top { top: -14px; right: -4px; padding: 6px; }
-            .wa-top svg { width: 20px; height: 20px; }
-            .home-image-in { max-height: 160px; }
-            .section-image { max-height: 250px; }
-            .counter { gap: 20px; flex-wrap: wrap; }
-            .counter-item .number { font-size: 18px; }
-            #access-overlay input { width: 200px; font-size: 16px; padding: 12px 16px; }
-            #access-overlay .logo { font-size: 30px; letter-spacing: 6px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- === IMAGE DE FOND === -->
-    <img class="bg-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
-    <div class="bg-overlay"></div>
-
-    <!-- === PARTICULES === -->
-    <div class="particle-container">
-        <div class="particle gold"></div>
-        <div class="particle red"></div>
-        <div class="particle gold"></div>
-        <div class="particle red"></div>
-        <div class="particle gold"></div>
-        <div class="particle red"></div>
-        <div class="particle gold"></div>
-        <div class="particle red"></div>
-    </div>
-
-    <!-- === MUSIQUE === -->
-    <audio id="bg-audio" loop>
-        <source src="song.mp3.m4a" type="audio/mp4">
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- === BOUTON SON === -->
-    <button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔇</button>
-
-    <!-- === BOUTON RETOUR === -->
-    <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
-
-    <!-- === ACCESS OVERLAY === -->
-    <div id="access-overlay">
-        <div class="lock-icon">⛔</div>
-        <div class="logo">J<span>O</span>YBOY</div>
-        <div class="sub">⚓ Family Access ⚓</div>
-        <input type="password" id="access-input" placeholder="••••••" maxlength="6" autofocus>
-        <button class="btn-access" onclick="checkAccess()">⚡ ENTER</button>
-        <div class="error-msg" id="access-error"></div>
-    </div>
-
-    <!-- === ÉCRAN D'ACCUEIL === -->
-    <div id="homeScreen" class="scroll-effect">
-        <!-- Logo WhatsApp -->
-        <div class="wa-top">
-            <svg viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-        </div>
-
-        <div style="font-size:20px; opacity:0.4; letter-spacing:6px; margin-bottom:2px;">⚓ ☠️ ⚓</div>
-        <div class="main-title">J<span>O</span>YBOY</div>
-        <div class="sub-title">⚔ Choose Your Path ⚔</div>
-
-        <!-- IMAGE D'ACCUEIL DANS LA CARTE -->
-        <img class="home-image-in" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
-
-        <div class="btn-group">
-            <button class="btn-path btn-family" onclick="openFamily()">
-                <span class="icon">🏠</span> FAMILY
-            </button>
-            <button class="btn-path btn-fans" onclick="choosePath('fans')">
-                <span class="icon">🔥</span> FANS
-            </button>
-        </div>
-
-        <!-- COMPTEURS -->
-        <div class="counter">
-            <div class="counter-item">
-                <span class="number" id="familyCount">0</span>
-                <span class="label">🏠 Family</span>
-            </div>
-            <div class="counter-item fans-counter">
-                <span class="number" id="fansCount">0</span>
-                <span class="label">🔥 Fans</span>
-            </div>
-        </div>
-
-        <div class="footer">
-            <a href="https://ablaye2020.github.io" target="_blank">ablaye2020.github.io</a>
-        </div>
-    </div>
-
-    <!-- === MAIN CONTENT === -->
-    <div id="main-content">
-        <img class="section-bg" id="sectionBg" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="bg" onerror="this.style.display='none'">
-
-        <div id="sectionBadge" class="section-badge family">🏠 FAMILY</div>
-
-        <img class="section-image" id="sectionImage" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="Section" onerror="this.style.display='none'">
-
-        <div class="logo-wa-container">
-            <svg class="wa-icon" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            <div class="main-logo">J<span>O</span>YBOY</div>
-        </div>
-        <div class="main-sub" id="mainSub">⚡ Signal Generator ⚡</div>
-
-        <div class="form-group">
-            <label>👤 Name / Username of the abuser</label>
-            <input type="text" id="nom" placeholder="Ex: John DOE or @username">
-        </div>
-
-        <div class="form-group">
-            <label>📱 Their WhatsApp number</label>
-            <input type="text" id="numero" placeholder="+221 70 820 15 85">
-        </div>
-
-        <div class="form-group">
-            <label>⚠️ Type of violation</label>
-            <select id="type">
-                <option value="harassment">Harassment / Bullying</option>
-                <option value="scam">Scam / Fraud</option>
-                <option value="identity">Identity Theft</option>
-                <option value="illegal">Illegal Content</option>
-                <option value="threats">Threats / Violence</option>
-                <option value="impersonation">Impersonation</option>
-                <option value="doxxing">Doxxing / Private info leaked</option>
-                <option value="other">Other (serious)</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>📝 What happened ? (be honest)</label>
-            <textarea id="details" placeholder="Describe exactly what this person did to you..."></textarea>
-        </div>
-
-        <div class="generated-box" id="generated-box">
-            <div class="msg-title">📨 GENERATING MESSAGE...</div>
-            <div class="msg-content" id="message-output">
-                <span class="cursor-blink"></span>
-            </div>
-        </div>
-
-        <div class="status-text" id="status-text">Fill the form and click GENERATE</div>
-
-        <div class="btn-group-form">
-            <button class="btn-form btn-generate" id="btn-generate" onclick="startGeneration()">⚡ GENERATE</button>
-            <button class="btn-form btn-copy" id="btn-copy" disabled onclick="copyMessage()">📋 COPY</button>
-            <button class="btn-form btn-whatsapp" id="btn-wa" disabled onclick="sendWhatsApp()">💬 WHATSAPP</button>
-        </div>
-
-        <div class="whatsapp-note">📌 Message copied automatically — then paste in WhatsApp Support chat</div>
-
-        <div class="footer-link">
-            <a href="https://ablaye2020.github.io" target="_blank">ablaye2020.github.io</a>
-        </div>
-    </div>
-
-    <script>
-        // ============================================
-        // COMPTEURS
-        // ============================================
-        function getCount(key) {
-            var count = localStorage.getItem(key);
-            return count ? parseInt(count) : 0;
-        }
-
-        function incrementCount(key) {
-            var count = getCount(key) + 1;
-            localStorage.setItem(key, count);
-            return count;
-        }
-
-        var familyCount = getCount('joyboy_family_visits');
-        var fansCount = getCount('joyboy_fans_visits');
-
-        document.getElementById('familyCount').textContent = familyCount;
-        document.getElementById('fansCount').textContent = fansCount;
-
-        // ============================================
-        // SON
-        // ============================================
-        var video = document.getElementById('bg-video');
-        var audio = document.getElementById('bg-audio');
-        var soundBtn = document.getElementById('soundBtn');
-        var isSoundOn = false;
-
-        function toggleSound() {
-            if (isSoundOn) {
-                if (video) video.muted = true;
-                audio.pause();
-                soundBtn.textContent = '🔇';
-                soundBtn.classList.remove('active');
-                isSoundOn = false;
-            } else {
-                if (video) { video.muted = false; video.volume = 0.3; }
-                audio.volume = 0.4;
-                audio.play().catch(function(e) {});
-                soundBtn.textContent = '🔊';
-                soundBtn.classList.add('active');
-                isSoundOn = true;
-            }
-        }
-
-        // ============================================
-        // CODE D'ACCÈS : 222200
-        // ============================================
-        function checkAccess() {
-            var input = document.getElementById('access-input');
-            var error = document.getElementById('access-error');
-            var code = input.value.trim();
-
-            if (code === '222200') {
-                document.getElementById('access-overlay').classList.remove('visible');
-                document.getElementById('access-overlay').classList.add('hidden');
-                choosePath('family');
-                error.textContent = '';
-            } else {
-                error.textContent = '❌ Code incorrect. Réessaie.';
-                input.value = '';
-                input.focus();
-            }
-        }
-
-        document.getElementById('access-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') { checkAccess(); }
-        });
-
-        // ============================================
-        // OUVRIR FAMILLE
-        // ============================================
-        function openFamily() {
-            document.getElementById('access-overlay').classList.remove('hidden');
-            document.getElementById('access-overlay').classList.add('visible');
-            document.getElementById('access-input').value = '';
-            document.getElementById('access-input').focus();
-            document.getElementById('access-error').textContent = '';
-        }
-
-        // ============================================
-        // CHOISIR
-        // ============================================
-        var currentSection = 'family';
-
-        function choosePath(section) {
-            currentSection = section;
-            document.getElementById('homeScreen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('backBtn').classList.add('visible');
-
-            var newCount = incrementCount(section === 'family' ? 'joyboy_family_visits' : 'joyboy_fans_visits');
-            if (section === 'family') {
-                document.getElementById('familyCount').textContent = newCount;
-            } else {
-                document.getElementById('fansCount').textContent = newCount;
-            }
-
-            var badge = document.getElementById('sectionBadge');
-            var sub = document.getElementById('mainSub');
-            var status = document.getElementById('status-text');
-            var sectionImg = document.getElementById('sectionImage');
-            var sectionBg = document.getElementById('sectionBg');
-
-            if (section === 'family') {
-                badge.className = 'section-badge family';
-                badge.textContent = '🏠 FAMILY';
-                sub.className = 'main-sub';
-                sub.textContent = '❤️ Protect Your Family';
-                status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.05)';
-                document.querySelector('.footer-link a').style.color = '#ffd700';
-                sectionImg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
-                sectionBg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
-            } else {
-                badge.className = 'section-badge fans';
-                badge.textContent = '🔥 FANS';
-                sub.className = 'main-sub';
-                sub.textContent = '⚡ Protect Your Community';
-                status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.05)';
-                document.querySelector('.footer-link a').style.color = '#ff4444';
-                sectionImg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
-                sectionBg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
-            }
-        }
-
-        function goBack() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('homeScreen').style.display = 'block';
-            document.getElementById('backBtn').classList.remove('visible');
-            document.getElementById('access-overlay').classList.remove('visible');
-            document.getElementById('access-overlay').classList.add('hidden');
-        }
-
-        // ============================================
-        // MESSAGES
-        // ============================================
-        var messageIndex = 0;
-
-        function generateFullMessage() {
-            var nom = document.getElementById('nom').value.trim();
-            var numero = document.getElementById('numero').value.trim();
-            var details = document.getElementById('details').value.trim();
-            var type = document.getElementById('type').value;
-
-            var typeLabels = {
-                harassment: "harassment and bullying",
-                scam: "scam and fraud",
-                identity: "identity theft",
-                illegal: "illegal content",
-                threats: "threats and violence",
-                impersonation: "impersonation",
-                doxxing: "doxxing and sharing private information",
-                other: "serious violations"
-            };
-
-            var typeLabel = typeLabels[type] || "serious violations";
-
-            var violationTexts = {
-                harassment: "Harassment and intimidation\nAbusive behavior\nMaking me feel unsafe",
-                scam: "Scam attempts\nFraudulent behavior\nMisleading others for money",
-                identity: "Identity theft\nPretending to be me or others\nUsing fake identity to harm",
-                illegal: "Sharing illegal content\nInappropriate material\nViolating community standards",
-                threats: "Threats and intimidation\nViolent language\nMaking me fear for my safety",
-                impersonation: "Impersonation\nPretending to be someone they're not\nDeceiving others",
-                doxxing: "Sharing private information\nDoxxing\nViolating my privacy",
-                other: "Multiple Terms of Service violations\nAbusive behavior\nCreating an unsafe environment"
-            };
-
-            var violationText = violationTexts[type] || violationTexts.other;
-
-            var familyMessages = [
-                "Dear WhatsApp Support Team,\n\nI am writing to you today with a heavy heart because my family is going through something terrible. A person on WhatsApp has been sending threatening messages to my wife and children. They have been insulting them, making them feel unsafe, and even threatening to harm them. My children are scared to even open the app now. This person knows our personal information and is using it to intimidate us.\n\nI have tried blocking them but they keep creating new accounts. I've reported them before but nothing changed. I am genuinely scared for my family's safety. We are not sleeping well. My wife is stressed, my kids are anxious, and I feel helpless because I can't stop this person.\n\nI am asking you, from the bottom of my heart, to please investigate this account and ban it permanently. I have screenshots of everything — the threats, the insults, the harassment. I can share all of it if needed. Please don't let this person continue to terrorize my family.\n\nThank you for reading this. I hope you can help us find peace again.\n\nSincerely,\nA father who just wants to protect his family",
-
-                "Hello WhatsApp Support,\n\nI am reaching out because I am exhausted. For weeks now, my family has been targeted by a user who seems to have no respect for anyone. They have been sending cruel messages to my wife, calling her names, and making her feel worthless. My children have seen these messages and they are confused and hurt. I am trying to be strong for them, but I am struggling.\n\nI don't know why this person is doing this. We have never done anything to them. But they won't stop. Every day there is a new message, a new insult, a new threat. I feel like I'm failing my family because I can't make it stop.\n\nI am begging you to look into this. I have documented everything — every message, every threat. I am ready to send it all to you. This person is not just annoying — they are dangerous. They are destroying my family's peace of mind.\n\nPlease, I am begging you, take action. Block this person. Investigate the account. Do whatever it takes to stop this harassment. My family needs peace. We need to feel safe again.\n\nThank you for your time.\n\nSincerely,\nA tired parent who needs help",
-
-                "Dear WhatsApp Team,\n\nI am writing to file a formal complaint against a user who has been harassing my family. I am angry — not just because of what they are doing, but because I feel like WhatsApp is not doing enough to stop it.\n\nThis person has been sending threatening messages to my children. They are teenagers, and they are scared. They don't want to use WhatsApp anymore because of this person. I have tried everything: blocking, reporting, ignoring. Nothing works. They just come back with a new number or a new account.\n\nI want to know: what does it take for WhatsApp to take action? How many reports do we need to make before someone actually investigates? I have sent you screenshots, I have given you the details, and yet nothing has changed.\n\nI am not asking for much. I am asking for you to do your job. Investigate this account. Ban this person. Protect my family from this harassment. I have evidence and I am ready to share it all.\n\nPlease respond to this message with confirmation of action taken. I am not going to let this go.\n\nRegards,\nA frustrated father who has had enough"
-            ];
-
-            var fansMessages = [
-                "Dear WhatsApp Support Team,\n\nI am writing to you because my fans are being targeted by scammers on your platform. Someone is pretending to be me and asking my followers for money. They are using my name, my photos, and my reputation to trick people who trust me.\n\nThis is not just a scam — it's a betrayal. My fans have supported me through everything. They believe in me. And now, someone is using that trust to steal from them. I feel responsible. I feel like I failed them by not catching this sooner.\n\nI have received over 100 messages from fans telling me they were contacted by this impersonator. Some of them almost sent money. This is unacceptable. I need your help to shut this down immediately.\n\nI have screenshots of the impersonator's conversations. I have the account details. I am ready to share everything with you. Please investigate this account and ban it permanently. My fans deserve protection.\n\nThank you for taking this seriously.\n\nSincerely,\nA creator who stands by his fans",
-
-                "Hello WhatsApp Support,\n\nI am a content creator who has built a community of thousands of fans who trust me. I have spent years earning that trust. And now, someone is using WhatsApp to destroy it.\n\nThere is a user who is impersonating me and scamming my fans. They are sending messages asking for donations, promising exclusive content, and stealing money from people who believe they are helping me. This is not just a violation of your rules — it's a violation of my relationship with my fans.\n\nMy fans are not just numbers. They are real people who have supported me through everything. They are students, workers, dreamers — they deserve better than this. They deserve to be protected.\n\nI demand that you investigate this account and remove it from the platform. I have evidence. I have proof. I have everything you need to take action.\n\nPlease don't let this continue. My fans are counting on me to protect them. And I am counting on you to do your job.\n\nThank you for your time.\n\nBest regards,\nA passionate creator",
-
-                "Dear WhatsApp Team,\n\nI never thought I would have to write a message like this. But here I am, because my fans are being scammed and I need your help.\n\nMy fans are amazing. They are the reason I wake up every morning with a smile on my face. They support me, they encourage me, they believe in me. And now, someone is taking advantage of that trust to steal from them.\n\nI have been receiving messages from fans who were contacted by a fake account pretending to be me. The scammer is asking for money, promising exclusive content, and using my name to gain trust. Some of my fans almost fell for it. Some of them are heartbroken that someone would do this.\n\nI need WhatsApp to step up and protect my community. I have screenshots of the fake account. I have everything you need to investigate and ban this person.\n\nPlease help me protect my fans. They deserve to feel safe. They deserve to know that WhatsApp is a place where they can connect with me without being scammed.\n\nThank you for your help.\n\nSincerely,\nA grateful creator"
-            ];
-
-            var messages = (currentSection === 'family') ? familyMessages : fansMessages;
-            var msg = messages[messageIndex % messages.length];
-
-            if (nom) msg = msg.replace('[numéro ou nom]', nom + (numero ? ' (' + numero + ')' : ''));
-            if (numero && !nom) msg = msg.replace('[numéro ou nom]', numero);
-
-            messageIndex++;
-            return msg;
-        }
-
-        // ============================================
-        // GÉNÉRATION
-        // ============================================
-        var isGenerating = false;
-        var displayText = '';
-
-        function startGeneration() {
-            if (isGenerating) return;
-
-            var output = document.getElementById('message-output');
-            var box = document.getElementById('generated-box');
-            var btnGen = document.getElementById('btn-generate');
-            var btnCopy = document.getElementById('btn-copy');
-            var btnWa = document.getElementById('btn-wa');
-            var status = document.getElementById('status-text');
-
-            isGenerating = true;
-            btnGen.disabled = true;
-            btnCopy.disabled = true;
-            btnWa.disabled = true;
-            status.textContent = '⏳ Generating...';
-            output.textContent = '';
-            box.style.display = 'block';
-
-            var fullMessage = generateFullMessage();
-            var chars = fullMessage.split('');
-            var index = 0;
-            displayText = '';
-
-            function typeNextChar() {
-                if (index < chars.length) {
-                    displayText += chars[index];
-                    output.textContent = displayText;
-                    index++;
-                    var delay = 12 + Math.random() * 20;
-                    setTimeout(typeNextChar, delay);
-                } else {
-                    isGenerating = false;
-                    btnGen.disabled = false;
-                    btnCopy.disabled = false;
-                    btnWa.disabled = false;
-                    status.textContent = '✅ Message ready';
-                    showToast('✅ Message generated');
-                }
-            }
-
-            setTimeout(typeNextChar, 100);
-        }
-
-        function copyMessage() {
-            var text = document.getElementById('message-output').textContent;
-            if (!text) return showToast('❌ Generate a message first');
-            navigator.clipboard.writeText(text).then(function() {
-                showToast('📋 Copied');
-            }).catch(function() {
-                var area = document.createElement('textarea');
-                area.value = text;
-                document.body.appendChild(area);
-                area.select();
-                document.execCommand('copy');
-                area.remove();
-                showToast('📋 Copied');
-            });
-        }
-
-        function sendWhatsApp() {
-            var text = document.getElementById('message-output').textContent;
-            if (!text) return showToast('❌ Generate a message first');
-
-            navigator.clipboard.writeText(text).then(function() {
-                showToast('📋 Copied! Opening WhatsApp...');
-            }).catch(function() {
-                var area = document.createElement('textarea');
-                area.value = text;
-                document.body.appendChild(area);
-                area.select();
-                document.execCommand('copy');
-                area.remove();
-                showToast('📋 Copied! Opening WhatsApp...');
-            });
-
-            setTimeout(function() {
-                window.open('https://wa.me/', '_blank');
-            }, 500);
-        }
-
-        function showToast(msg) {
-            var t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            clearTimeout(t._timer);
-            t._timer = setTimeout(function() {
-                t.classList.remove('show');
-            }, 2500);
-        }
-    </script>
-
-</body>
-</html>
+        /* BOUTON FANS (ROUGE) */
+        .btn-fans {
+            background: linear-gradient(135deg, rgba(255, 34, 0,
