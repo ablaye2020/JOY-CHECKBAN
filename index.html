@@ -40,60 +40,153 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.70) 100%);
             pointer-events: none;
+        }
+
+        /* === LIGNES DE LUMIÈRE QUI TRAVERSENT === */
+        .light-line {
+            position: fixed;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), rgba(255, 215, 0, 0.9), rgba(255, 215, 0, 0.6), transparent);
+            height: 2px;
+            width: 100%;
+            animation: lightSweep 4s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        .light-line:nth-child(1) {
+            top: 15%;
+            animation-delay: 0s;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0.3), transparent);
+        }
+
+        .light-line:nth-child(2) {
+            top: 45%;
+            animation-delay: 1.3s;
+            background: linear-gradient(90deg, transparent, rgba(255, 34, 0, 0.3), rgba(255, 34, 0, 0.7), rgba(255, 34, 0, 0.3), transparent);
+            height: 1px;
+        }
+
+        .light-line:nth-child(3) {
+            top: 75%;
+            animation-delay: 2.6s;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2), transparent);
+            height: 1px;
+        }
+
+        @keyframes lightSweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* === LIGNES VERTICALES === */
+        .light-line-v {
+            position: fixed;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(180deg, transparent, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 0.4), transparent);
+            width: 2px;
+            height: 100%;
+            animation: lightSweepV 5s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        .light-line-v:nth-child(4) { left: 20%; animation-delay: 0.8s; }
+        .light-line-v:nth-child(5) { left: 50%; animation-delay: 2.1s; }
+        .light-line-v:nth-child(6) { left: 80%; animation-delay: 3.4s; }
+
+        @keyframes lightSweepV {
+            0% { transform: translateY(-100%); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
         }
 
         /* === PARTICULES === */
         .particle-container {
             position: fixed;
             inset: 0;
-            z-index: 1;
+            z-index: 2;
             pointer-events: none;
             overflow: hidden;
         }
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             animation: floatParticle 10s ease-in-out infinite;
-            box-shadow: 0 0 20px currentColor;
+            box-shadow: 0 0 25px currentColor;
         }
 
         .particle.gold { background: #ffd700; color: #ffd700; }
         .particle.red { background: #ff2200; color: #ff2200; }
+        .particle.white { background: #ffffff; color: #ffffff; }
 
         @keyframes floatParticle {
             0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
-            15% { opacity: 0.9; }
-            85% { opacity: 0.7; }
+            15% { opacity: 1; }
+            85% { opacity: 0.8; }
             100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
-        .particle:nth-child(1) { --tx: 300px; --ty: -250px; animation-delay: 0s; left: 5%; top: 10%; }
-        .particle:nth-child(2) { --tx: -280px; --ty: 350px; animation-delay: 1.2s; left: 20%; top: 35%; }
-        .particle:nth-child(3) { --tx: 400px; --ty: 220px; animation-delay: 2.4s; left: 50%; top: 20%; }
-        .particle:nth-child(4) { --tx: -350px; --ty: -280px; animation-delay: 3.6s; left: 70%; top: 55%; }
-        .particle:nth-child(5) { --tx: 250px; --ty: -400px; animation-delay: 4.8s; left: 10%; top: 70%; }
-        .particle:nth-child(6) { --tx: -220px; --ty: 450px; animation-delay: 6s; left: 40%; top: 5%; }
-        .particle:nth-child(7) { --tx: 450px; --ty: 180px; animation-delay: 7.2s; left: 60%; top: 45%; }
-        .particle:nth-child(8) { --tx: -400px; --ty: -350px; animation-delay: 8.4s; left: 30%; top: 80%; }
+        .particle:nth-child(1) { --tx: 350px; --ty: -280px; animation-delay: 0s; left: 5%; top: 10%; }
+        .particle:nth-child(2) { --tx: -300px; --ty: 380px; animation-delay: 1.2s; left: 20%; top: 35%; }
+        .particle:nth-child(3) { --tx: 450px; --ty: 250px; animation-delay: 2.4s; left: 50%; top: 20%; }
+        .particle:nth-child(4) { --tx: -380px; --ty: -300px; animation-delay: 3.6s; left: 70%; top: 55%; }
+        .particle:nth-child(5) { --tx: 280px; --ty: -450px; animation-delay: 4.8s; left: 10%; top: 70%; }
+        .particle:nth-child(6) { --tx: -250px; --ty: 480px; animation-delay: 6s; left: 40%; top: 5%; }
+        .particle:nth-child(7) { --tx: 480px; --ty: 200px; animation-delay: 7.2s; left: 60%; top: 45%; }
+        .particle:nth-child(8) { --tx: -420px; --ty: -380px; animation-delay: 8.4s; left: 30%; top: 80%; }
+        .particle:nth-child(9) { --tx: 300px; --ty: -350px; animation-delay: 1.8s; left: 80%; top: 15%; }
+        .particle:nth-child(10) { --tx: -200px; --ty: 400px; animation-delay: 5.4s; left: 55%; top: 85%; }
+        .particle:nth-child(11) { --tx: 400px; --ty: -200px; animation-delay: 3s; left: 15%; top: 50%; }
+        .particle:nth-child(12) { --tx: -350px; --ty: 330px; animation-delay: 7.8s; left: 85%; top: 40%; }
 
         /* === CARTE PRINCIPALE === */
         .scroll-effect {
             position: relative;
             z-index: 10;
-            background: rgba(10, 8, 6, 0.70);
-            backdrop-filter: blur(16px);
+            background: rgba(10, 8, 6, 0.65);
+            backdrop-filter: blur(20px);
             border-radius: 28px;
             padding: 40px 35px;
             max-width: 580px;
             width: 100%;
-            border: 1px solid rgba(180, 120, 60, 0.08);
+            border: 1px solid rgba(180, 120, 60, 0.10);
             text-align: center;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.4), inset 0 0 80px rgba(255, 215, 0, 0.02);
+            animation: cardPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes cardPulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(0,0,0,0.3), inset 0 0 40px rgba(255,215,0,0.01); }
+            50% { box-shadow: 0 0 100px rgba(255,215,0,0.04), inset 0 0 60px rgba(255,215,0,0.03); }
+        }
+
+        /* === BORDURE LUMINEUSE === */
+        .scroll-effect::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,34,0,0.10), rgba(255,215,0,0.15));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         /* === PHRASE EN HAUT === */
@@ -217,7 +310,7 @@
             font-size: 24px;
         }
 
-        /* BOUTON FAMILY (OR) - TRÈS DÉCORÉ */
+        /* BOUTON FAMILY (OR) */
         .btn-family {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.04));
             color: #ffd700;
@@ -225,7 +318,6 @@
             text-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.05), inset 0 0 30px rgba(255, 215, 0, 0.02);
         }
-
         .btn-family::before {
             content: '';
             position: absolute;
@@ -239,7 +331,6 @@
             opacity: 0;
             transition: 0.6s;
         }
-
         .btn-family::after {
             content: '✦';
             position: absolute;
@@ -250,7 +341,6 @@
             opacity: 0.3;
             transition: 0.4s;
         }
-
         .btn-family:hover::before { opacity: 1; }
         .btn-family:hover {
             transform: scale(1.04);
@@ -261,7 +351,7 @@
         }
         .btn-family:hover::after { opacity: 0.8; transform: translateY(-50%) rotate(180deg); }
 
-        /* BOUTON FANS (ROUGE) - TRÈS DÉCORÉ */
+        /* BOUTON FANS (ROUGE) */
         .btn-fans {
             background: linear-gradient(135deg, rgba(255, 34, 0, 0.15), rgba(255, 34, 0, 0.04));
             color: #ff4444;
@@ -269,7 +359,6 @@
             text-shadow: 0 0 40px rgba(255, 34, 0, 0.15);
             box-shadow: 0 0 30px rgba(255, 34, 0, 0.05), inset 0 0 30px rgba(255, 34, 0, 0.02);
         }
-
         .btn-fans::before {
             content: '';
             position: absolute;
@@ -283,7 +372,6 @@
             opacity: 0;
             transition: 0.6s;
         }
-
         .btn-fans::after {
             content: '✦';
             position: absolute;
@@ -294,7 +382,6 @@
             opacity: 0.3;
             transition: 0.4s;
         }
-
         .btn-fans:hover::before { opacity: 1; }
         .btn-fans:hover {
             transform: scale(1.04);
@@ -833,16 +920,28 @@
     <img class="bg-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
     <div class="bg-overlay"></div>
 
+    <!-- === LIGNES DE LUMIÈRE === -->
+    <div class="light-line"></div>
+    <div class="light-line"></div>
+    <div class="light-line"></div>
+    <div class="light-line-v"></div>
+    <div class="light-line-v"></div>
+    <div class="light-line-v"></div>
+
     <!-- === PARTICULES === -->
     <div class="particle-container">
         <div class="particle gold"></div>
         <div class="particle red"></div>
+        <div class="particle white"></div>
         <div class="particle gold"></div>
         <div class="particle red"></div>
+        <div class="particle white"></div>
         <div class="particle gold"></div>
         <div class="particle red"></div>
+        <div class="particle white"></div>
         <div class="particle gold"></div>
         <div class="particle red"></div>
+        <div class="particle white"></div>
     </div>
 
     <!-- === MUSIQUE === -->
@@ -857,14 +956,24 @@
     <!-- === BOUTON RETOUR === -->
     <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
 
-    <!-- === ACCESS OVERLAY === -->
-    <div id="access-overlay">
+    <!-- === ACCESS OVERLAY (FAMILY) === -->
+    <div id="access-overlay-family">
         <div class="lock-icon">⛔</div>
         <div class="logo">J<span>O</span>YBOY</div>
-        <div class="sub">⚓ Family Access ⚓</div>
-        <input type="password" id="access-input" placeholder="••••••" maxlength="6" autofocus>
-        <button class="btn-access" onclick="checkAccess()">⚡ ENTER</button>
-        <div class="error-msg" id="access-error"></div>
+        <div class="sub">🏠 Family Access</div>
+        <input type="password" id="access-input-family" placeholder="••••••" maxlength="6" autofocus>
+        <button class="btn-access" onclick="checkAccessFamily()">⚡ ENTER</button>
+        <div class="error-msg" id="access-error-family"></div>
+    </div>
+
+    <!-- === ACCESS OVERLAY (FANS) === -->
+    <div id="access-overlay-fans" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(20px); z-index:1000; justify-content:center; align-items:center; flex-direction:column; gap:20px;">
+        <div class="lock-icon">⛔</div>
+        <div class="logo">J<span>O</span>YBOY</div>
+        <div class="sub" style="color:#ff4444;">🔥 Fans Access</div>
+        <input type="password" id="access-input-fans" placeholder="••••" maxlength="4" style="background:rgba(255,255,255,0.04); border:2px solid rgba(255,34,0,0.3); border-radius:12px; padding:14px 24px; font-size:20px; color:#fff; text-align:center; width:260px; outline:none; letter-spacing:6px; font-family:'Georgia',serif; transition:0.3s;">
+        <button class="btn-access" onclick="checkAccessFans()" style="background:linear-gradient(135deg, #ff2200, #cc0000); color:#fff; border:none; padding:14px 56px; border-radius:40px; font-size:16px; font-weight:700; cursor:pointer; font-family:'Georgia',serif; letter-spacing:4px; box-shadow:0 0 40px rgba(255,34,0,0.15); transition:0.3s;">⚡ ENTER</button>
+        <div class="error-msg" id="access-error-fans" style="color:#ff4444; font-size:14px; min-height:20px; font-family:'Georgia',serif;"></div>
     </div>
 
     <!-- === ÉCRAN D'ACCUEIL === -->
@@ -890,7 +999,7 @@
             <button class="btn-path btn-family" onclick="openFamily()">
                 <span class="icon">🏠</span> FAMILY
             </button>
-            <button class="btn-path btn-fans" onclick="choosePath('fans')">
+            <button class="btn-path btn-fans" onclick="openFans()">
                 <span class="icon">🔥</span> FANS
             </button>
         </div>
@@ -1030,16 +1139,15 @@
         }
 
         // ============================================
-        // CODE D'ACCÈS : 222200
+        // CODE D'ACCÈS FAMILY : 222200
         // ============================================
-        function checkAccess() {
-            var input = document.getElementById('access-input');
-            var error = document.getElementById('access-error');
+        function checkAccessFamily() {
+            var input = document.getElementById('access-input-family');
+            var error = document.getElementById('access-error-family');
             var code = input.value.trim();
 
             if (code === '222200') {
-                document.getElementById('access-overlay').classList.remove('visible');
-                document.getElementById('access-overlay').classList.add('hidden');
+                document.getElementById('access-overlay-family').style.display = 'none';
                 choosePath('family');
                 error.textContent = '';
             } else {
@@ -1049,19 +1157,51 @@
             }
         }
 
-        document.getElementById('access-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') { checkAccess(); }
+        document.getElementById('access-input-family').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { checkAccessFamily(); }
+        });
+
+        // ============================================
+        // CODE D'ACCÈS FANS : 2007
+        // ============================================
+        function checkAccessFans() {
+            var input = document.getElementById('access-input-fans');
+            var error = document.getElementById('access-error-fans');
+            var code = input.value.trim();
+
+            if (code === '2007') {
+                document.getElementById('access-overlay-fans').style.display = 'none';
+                choosePath('fans');
+                error.textContent = '';
+            } else {
+                error.textContent = '❌ Code incorrect. Réessaie.';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        document.getElementById('access-input-fans').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { checkAccessFans(); }
         });
 
         // ============================================
         // OUVRIR FAMILLE
         // ============================================
         function openFamily() {
-            document.getElementById('access-overlay').classList.remove('hidden');
-            document.getElementById('access-overlay').classList.add('visible');
-            document.getElementById('access-input').value = '';
-            document.getElementById('access-input').focus();
-            document.getElementById('access-error').textContent = '';
+            document.getElementById('access-overlay-family').style.display = 'flex';
+            document.getElementById('access-input-family').value = '';
+            document.getElementById('access-input-family').focus();
+            document.getElementById('access-error-family').textContent = '';
+        }
+
+        // ============================================
+        // OUVRIR FANS
+        // ============================================
+        function openFans() {
+            document.getElementById('access-overlay-fans').style.display = 'flex';
+            document.getElementById('access-input-fans').value = '';
+            document.getElementById('access-input-fans').focus();
+            document.getElementById('access-error-fans').textContent = '';
         }
 
         // ============================================
@@ -1115,8 +1255,8 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('homeScreen').style.display = 'block';
             document.getElementById('backBtn').classList.remove('visible');
-            document.getElementById('access-overlay').classList.remove('visible');
-            document.getElementById('access-overlay').classList.add('hidden');
+            document.getElementById('access-overlay-family').style.display = 'none';
+            document.getElementById('access-overlay-fans').style.display = 'none';
         }
 
         // ============================================
