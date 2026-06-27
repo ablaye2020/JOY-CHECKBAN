@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* === IMAGE DE FOND === */
+        /* === IMAGE DE FOND (globale) === */
         .bg-image {
             position: fixed;
             inset: 0;
@@ -31,7 +31,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.40;
+            opacity: 0.35;
             pointer-events: none;
             filter: brightness(0.5) saturate(1.1);
         }
@@ -88,33 +88,33 @@
             background: rgba(15, 10, 8, 0.75);
             backdrop-filter: blur(16px);
             border-radius: 24px;
-            padding: 45px 40px;
-            max-width: 540px;
+            padding: 40px 35px;
+            max-width: 560px;
             width: 100%;
-            border: 1px solid rgba(180, 120, 60, 0.12);
-            box-shadow: 0 0 80px rgba(180, 120, 60, 0.03);
+            border: 1px solid rgba(180, 120, 60, 0.10);
+            box-shadow: 0 0 80px rgba(180, 120, 60, 0.02);
             text-align: center;
         }
 
         /* === LOGO WHATSAPP EN HAUT À DROITE === */
         .wa-top {
             position: absolute;
-            top: -22px;
-            right: -10px;
-            background: rgba(37, 211, 102, 0.12);
+            top: -18px;
+            right: -6px;
+            background: rgba(37, 211, 102, 0.10);
             border-radius: 50%;
-            padding: 12px;
-            border: 2px solid rgba(37, 211, 102, 0.15);
-            box-shadow: 0 0 40px rgba(37, 211, 102, 0.08);
+            padding: 10px;
+            border: 2px solid rgba(37, 211, 102, 0.10);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.05);
             animation: waFloat 3s ease-in-out infinite;
         }
 
         .wa-top svg {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             fill: #25D366;
             display: block;
-            filter: drop-shadow(0 0 15px rgba(37, 211, 102, 0.2));
+            filter: drop-shadow(0 0 12px rgba(37, 211, 102, 0.15));
         }
 
         @keyframes waFloat {
@@ -122,75 +122,74 @@
             50% { transform: translateY(-4px) scale(1.05); }
         }
 
-        /* === TITRE JOYBOY === */
+        /* === TITRE === */
         .main-title {
-            font-size: 56px;
+            font-size: 50px;
             font-weight: 900;
-            letter-spacing: 14px;
+            letter-spacing: 12px;
             color: #ffd700;
-            text-shadow: 
-                0 0 40px rgba(255, 215, 0, 0.12),
-                0 4px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.10), 0 4px 30px rgba(0, 0, 0, 0.5);
             font-family: 'Georgia', serif;
             margin-bottom: 2px;
         }
-        .main-title span {
-            color: #ff2200;
-            text-shadow: 0 0 50px rgba(255, 34, 0, 0.15);
-        }
+        .main-title span { color: #ff2200; text-shadow: 0 0 50px rgba(255, 34, 0, 0.12); }
 
         .main-title::after {
             content: '';
             display: block;
-            width: 35%;
+            width: 30%;
             height: 2px;
-            margin: 8px auto 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.15), transparent);
+            margin: 6px auto 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.12), transparent);
         }
 
-        /* === SOUS-TITRE === */
         .sub-title {
-            color: rgba(255, 215, 0, 0.45);
-            font-size: 13px;
+            color: rgba(255, 215, 0, 0.40);
+            font-size: 12px;
             letter-spacing: 10px;
             text-transform: uppercase;
             font-family: 'Georgia', serif;
-            margin-top: 14px;
-            margin-bottom: 30px;
+            margin-top: 12px;
+            margin-bottom: 22px;
             font-weight: 300;
         }
 
         .pirate-icon {
-            font-size: 22px;
+            font-size: 20px;
             display: block;
             margin-bottom: 2px;
-            opacity: 0.5;
+            opacity: 0.4;
             letter-spacing: 6px;
         }
 
-        /* === IMAGE D'ACCUEIL === */
+        /* === IMAGE D'ACCUEIL (PLUS GRANDE) === */
         .home-image {
             width: 100%;
-            max-height: 200px;
+            max-height: 280px;
             object-fit: cover;
             border-radius: 16px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.05);
+            transition: 0.4s;
+        }
+        .home-image:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.04);
         }
 
         /* === BOUTONS === */
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             margin: 6px 0 10px;
         }
 
         .btn-path {
-            padding: 16px 28px;
+            padding: 15px 26px;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.4s ease;
@@ -201,39 +200,70 @@
         }
 
         .btn-family {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.10), rgba(255, 215, 0, 0.03));
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.02));
             color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.10);
         }
         .btn-family:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.08);
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.05));
-            border-color: rgba(255, 215, 0, 0.25);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.06);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.04));
+            border-color: rgba(255, 215, 0, 0.20);
         }
 
         .btn-fans {
-            background: linear-gradient(135deg, rgba(255, 34, 0, 0.10), rgba(255, 34, 0, 0.03));
+            background: linear-gradient(135deg, rgba(255, 34, 0, 0.08), rgba(255, 34, 0, 0.02));
             color: #ff4444;
-            border: 1px solid rgba(255, 34, 0, 0.12);
+            border: 1px solid rgba(255, 34, 0, 0.10);
         }
         .btn-fans:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 50px rgba(255, 34, 0, 0.08);
-            background: linear-gradient(135deg, rgba(255, 34, 0, 0.18), rgba(255, 34, 0, 0.05));
-            border-color: rgba(255, 34, 0, 0.25);
+            box-shadow: 0 0 50px rgba(255, 34, 0, 0.06);
+            background: linear-gradient(135deg, rgba(255, 34, 0, 0.15), rgba(255, 34, 0, 0.04));
+            border-color: rgba(255, 34, 0, 0.20);
         }
 
-        .btn-path .icon {
-            margin-right: 10px;
+        .btn-path .icon { margin-right: 10px; }
+
+        /* === COMPTEUR DE VISITEURS === */
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
         }
+
+        .counter-item {
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+
+        .counter-item .number {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd700;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        .counter-item .label {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #555;
+            letter-spacing: 3px;
+            margin-top: 2px;
+        }
+
+        .counter-item.fans-counter .number { color: #ff4444; }
 
         /* === PIED DE PAGE === */
         .footer {
-            margin-top: 18px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 11px;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 10px;
             color: #333;
             letter-spacing: 2px;
             font-family: 'Georgia', serif;
@@ -241,12 +271,10 @@
         .footer a {
             color: #ffd700;
             text-decoration: none;
-            opacity: 0.25;
+            opacity: 0.20;
             transition: 0.3s;
         }
-        .footer a:hover {
-            opacity: 0.6;
-        }
+        .footer a:hover { opacity: 0.50; }
 
         /* === BOUTON SON === */
         .sound-btn {
@@ -272,10 +300,7 @@
             background: rgba(255, 255, 255, 0.08);
             transform: scale(1.05);
         }
-        .sound-btn.active {
-            color: #25D366;
-            border-color: rgba(37, 211, 102, 0.12);
-        }
+        .sound-btn.active { color: #25D366; border-color: rgba(37, 211, 102, 0.10); }
 
         /* === BOUTON RETOUR === */
         .back-btn {
@@ -301,33 +326,48 @@
             background: rgba(255, 255, 255, 0.08);
             transform: scale(1.05);
         }
-        .back-btn.visible {
-            display: flex;
-        }
+        .back-btn.visible { display: flex; }
 
         /* === MAIN CONTENT === */
         #main-content {
             display: none;
             position: relative;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.50);
+            background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(12px);
             border-radius: 32px;
             padding: 40px 38px;
             max-width: 720px;
             width: 100%;
             margin: 20px auto;
-            border: 1px solid rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.03);
+        }
+
+        /* Image de fond pour chaque section */
+        .section-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 32px;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .section-image {
             width: 100%;
-            max-height: 200px;
+            max-height: 250px;
             object-fit: cover;
             border-radius: 16px;
             margin-bottom: 14px;
-            border: 1px solid rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.03);
+            position: relative;
+            z-index: 2;
+            transition: 0.4s;
         }
+        .section-image:hover { transform: scale(1.01); }
 
         .section-badge {
             display: inline-block;
@@ -341,16 +381,18 @@
             margin-bottom: 10px;
             text-align: center;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
         .section-badge.family {
-            background: rgba(255, 215, 0, 0.06);
+            background: rgba(255, 215, 0, 0.05);
             color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.05);
         }
         .section-badge.fans {
-            background: rgba(255, 34, 0, 0.06);
+            background: rgba(255, 34, 0, 0.05);
             color: #ff4444;
-            border: 1px solid rgba(255, 34, 0, 0.06);
+            border: 1px solid rgba(255, 34, 0, 0.05);
         }
 
         .logo-wa-container {
@@ -359,13 +401,15 @@
             justify-content: center;
             gap: 14px;
             margin-bottom: 2px;
+            position: relative;
+            z-index: 2;
         }
 
         .wa-icon {
             width: 38px;
             height: 38px;
             fill: #25D366;
-            filter: drop-shadow(0 0 25px rgba(37, 211, 102, 0.15));
+            filter: drop-shadow(0 0 25px rgba(37, 211, 102, 0.10));
             animation: waPulse 2.5s ease-in-out infinite;
             flex-shrink: 0;
         }
@@ -380,7 +424,7 @@
             font-weight: 900;
             letter-spacing: 10px;
             color: #ffffff;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.06);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.05);
             text-align: center;
             font-family: 'Georgia', serif;
             margin-bottom: 0;
@@ -393,16 +437,20 @@
             font-size: 11px;
             letter-spacing: 8px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.04);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.03);
             padding-bottom: 14px;
             margin-bottom: 20px;
             font-family: 'Georgia', serif;
-            opacity: 0.4;
+            opacity: 0.35;
+            position: relative;
+            z-index: 2;
         }
 
         .form-group {
             margin-bottom: 16px;
             text-align: left;
+            position: relative;
+            z-index: 2;
         }
         .form-group label {
             color: #aaa;
@@ -429,17 +477,11 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-bottom: 1px solid #ffd700;
         }
-        .form-group select option {
-            background: #111;
-            color: #eee;
-        }
-        .form-group textarea {
-            min-height: 56px;
-            resize: vertical;
-        }
+        .form-group select option { background: #111; color: #eee; }
+        .form-group textarea { min-height: 56px; resize: vertical; }
 
         .generated-box {
-            background: rgba(255, 215, 0, 0.02);
+            background: rgba(255, 215, 0, 0.01);
             border-radius: 12px;
             padding: 14px 18px;
             margin: 16px 0 18px;
@@ -448,7 +490,9 @@
             max-height: 400px;
             overflow-y: auto;
             min-height: 50px;
-            border-left: 2px solid rgba(255, 215, 0, 0.06);
+            border-left: 2px solid rgba(255, 215, 0, 0.05);
+            position: relative;
+            z-index: 2;
         }
         .generated-box.visible { display: block; }
         .generated-box .msg-title {
@@ -458,7 +502,7 @@
             text-transform: uppercase;
             margin-bottom: 6px;
             font-family: 'Georgia', serif;
-            opacity: 0.35;
+            opacity: 0.30;
         }
         .generated-box .msg-content {
             color: #eee;
@@ -477,16 +521,15 @@
             vertical-align: text-bottom;
             margin-left: 2px;
         }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .btn-group-form {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
+            position: relative;
+            z-index: 2;
         }
         .btn-form {
             padding: 12px 28px;
@@ -504,43 +547,23 @@
         .btn-generate {
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #000;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.06);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.04);
         }
-        .btn-generate:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.12);
-        }
-        .btn-generate:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-generate:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(255, 215, 0, 0.10); }
+        .btn-generate:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
         .btn-copy {
             background: rgba(255, 255, 255, 0.06);
             color: #ccc;
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .btn-copy:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.03);
-        }
-        .btn-copy:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
+        .btn-copy:hover { background: rgba(255, 255, 255, 0.12); transform: scale(1.03); }
+        .btn-copy:disabled { opacity: 0.3; cursor: not-allowed; }
         .btn-whatsapp {
             background: #25D366;
             color: #fff;
         }
-        .btn-whatsapp:hover {
-            background: #1da851;
-            transform: scale(1.03);
-        }
-        .btn-whatsapp:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-whatsapp:hover { background: #1da851; transform: scale(1.03); }
+        .btn-whatsapp:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
 
         .toast {
             position: fixed;
@@ -549,7 +572,7 @@
             transform: translateX(-50%);
             background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.05);
             padding: 10px 24px;
             border-radius: 30px;
             color: #ccc;
@@ -569,14 +592,18 @@
             margin-top: 8px;
             font-family: 'Georgia', serif;
             min-height: 18px;
+            position: relative;
+            z-index: 2;
         }
 
         .footer-link {
             text-align: center;
             margin-top: 18px;
             padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
             font-family: 'Georgia', serif;
+            position: relative;
+            z-index: 2;
         }
         .footer-link a {
             color: #ffd700;
@@ -584,11 +611,9 @@
             font-size: 12px;
             letter-spacing: 3px;
             transition: 0.3s;
-            opacity: 0.2;
+            opacity: 0.15;
         }
-        .footer-link a:hover {
-            opacity: 0.5;
-        }
+        .footer-link a:hover { opacity: 0.40; }
 
         .whatsapp-note {
             text-align: center;
@@ -597,21 +622,25 @@
             margin-top: 6px;
             font-family: 'Georgia', serif;
             letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 600px) {
-            .scroll-effect { padding: 30px 18px; }
-            .main-title { font-size: 38px; letter-spacing: 10px; }
-            .sub-title { font-size: 11px; letter-spacing: 6px; }
-            .btn-path { font-size: 15px; padding: 14px 20px; }
+            .scroll-effect { padding: 28px 16px; }
+            .main-title { font-size: 36px; letter-spacing: 8px; }
+            .sub-title { font-size: 10px; letter-spacing: 6px; }
+            .btn-path { font-size: 14px; padding: 13px 18px; }
             .back-btn { top: 10px; left: 10px; width: 36px; height: 36px; font-size: 16px; }
             .sound-btn { bottom: 20px; right: 20px; width: 38px; height: 38px; font-size: 16px; }
             #main-content { padding: 24px 16px; }
-            .main-logo { font-size: 30px; letter-spacing: 8px; }
-            .wa-top { top: -16px; right: -6px; padding: 8px; }
-            .wa-top svg { width: 24px; height: 24px; }
-            .section-image { max-height: 150px; }
-            .home-image { max-height: 150px; }
+            .main-logo { font-size: 28px; letter-spacing: 6px; }
+            .wa-top { top: -14px; right: -4px; padding: 6px; }
+            .wa-top svg { width: 20px; height: 20px; }
+            .home-image { max-height: 200px; }
+            .section-image { max-height: 180px; }
+            .counter { gap: 20px; flex-wrap: wrap; }
+            .counter-item .number { font-size: 18px; }
         }
     </style>
 </head>
@@ -658,7 +687,7 @@
         <div class="main-title">J<span>O</span>YBOY</div>
         <div class="sub-title">⚔ Choose Your Path ⚔</div>
 
-        <!-- Image d'accueil -->
+        <!-- Image d'accueil (plus grande) -->
         <img class="home-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
 
         <div class="btn-group">
@@ -670,6 +699,18 @@
             </button>
         </div>
 
+        <!-- COMPTEUR DE VISITEURS -->
+        <div class="counter">
+            <div class="counter-item">
+                <span class="number" id="familyCount">0</span>
+                <span class="label">🏠 Family</span>
+            </div>
+            <div class="counter-item fans-counter">
+                <span class="number" id="fansCount">0</span>
+                <span class="label">🔥 Fans</span>
+            </div>
+        </div>
+
         <div class="footer">
             <a href="https://ablaye2020.github.io" target="_blank">ablaye2020.github.io</a>
         </div>
@@ -677,9 +718,12 @@
 
     <!-- === MAIN CONTENT === -->
     <div id="main-content">
+        <!-- Image de fond pour la section -->
+        <img class="section-bg" id="sectionBg" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="bg" onerror="this.style.display='none'">
+
         <div id="sectionBadge" class="section-badge family">🏠 FAMILY</div>
 
-        <!-- Image de section (change selon famille/fans) -->
+        <!-- Image de section (plus grande) -->
         <img class="section-image" id="sectionImage" src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="Section" onerror="this.style.display='none'">
 
         <div class="logo-wa-container">
@@ -743,6 +787,27 @@
 
     <script>
         // ============================================
+        // COMPTEUR DE VISITEURS (localStorage)
+        // ============================================
+        function getCount(key) {
+            var count = localStorage.getItem(key);
+            return count ? parseInt(count) : 0;
+        }
+
+        function incrementCount(key) {
+            var count = getCount(key) + 1;
+            localStorage.setItem(key, count);
+            return count;
+        }
+
+        // Initialiser les compteurs
+        var familyCount = getCount('joyboy_family_visits');
+        var fansCount = getCount('joyboy_fans_visits');
+
+        document.getElementById('familyCount').textContent = familyCount;
+        document.getElementById('fansCount').textContent = fansCount;
+
+        // ============================================
         // GESTION DU SON
         // ============================================
         var video = document.getElementById('bg-video');
@@ -752,14 +817,13 @@
 
         function toggleSound() {
             if (isSoundOn) {
-                video.muted = true;
+                if (video) video.muted = true;
                 audio.pause();
                 soundBtn.textContent = '🔇';
                 soundBtn.classList.remove('active');
                 isSoundOn = false;
             } else {
-                video.muted = false;
-                video.volume = 0.3;
+                if (video) { video.muted = false; video.volume = 0.3; }
                 audio.volume = 0.4;
                 audio.play().catch(function(e) {});
                 soundBtn.textContent = '🔊';
@@ -779,10 +843,21 @@
             document.getElementById('main-content').style.display = 'block';
             document.getElementById('backBtn').classList.add('visible');
 
+            // Incrémenter le compteur
+            if (section === 'family') {
+                var newCount = incrementCount('joyboy_family_visits');
+                document.getElementById('familyCount').textContent = newCount;
+                document.querySelector('.counter-item .number').textContent = newCount;
+            } else {
+                var newCount = incrementCount('joyboy_fans_visits');
+                document.getElementById('fansCount').textContent = newCount;
+            }
+
             var badge = document.getElementById('sectionBadge');
             var sub = document.getElementById('mainSub');
             var status = document.getElementById('status-text');
             var sectionImg = document.getElementById('sectionImage');
+            var sectionBg = document.getElementById('sectionBg');
 
             if (section === 'family') {
                 badge.className = 'section-badge family';
@@ -790,18 +865,20 @@
                 sub.className = 'main-sub';
                 sub.textContent = '❤️ Protect Your Family';
                 status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.06)';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.05)';
                 document.querySelector('.footer-link a').style.color = '#ffd700';
                 sectionImg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
+                sectionBg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
             } else {
                 badge.className = 'section-badge fans';
                 badge.textContent = '🔥 FANS';
                 sub.className = 'main-sub';
                 sub.textContent = '⚡ Protect Your Community';
                 status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.06)';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.05)';
                 document.querySelector('.footer-link a').style.color = '#ff4444';
                 sectionImg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
+                sectionBg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
             }
         }
 
