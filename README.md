@@ -1,1 +1,0 @@
-# REDIX - KING -REPORTER
