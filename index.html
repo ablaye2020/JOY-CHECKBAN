@@ -23,7 +23,7 @@
             padding: 20px;
         }
 
-        /* === IMAGE DE FOND (accueil) === */
+        /* === IMAGE DE FOND (accueil - BIEN VISIBLE) === */
         .bg-image {
             position: fixed;
             inset: 0;
@@ -31,16 +31,16 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.30;
+            opacity: 0.50;
             pointer-events: none;
-            filter: brightness(0.5) saturate(1.1);
+            filter: brightness(0.55) saturate(1.1);
         }
 
         .bg-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.70) 100%);
             pointer-events: none;
         }
 
@@ -85,13 +85,13 @@
         .scroll-effect {
             position: relative;
             z-index: 10;
-            background: rgba(15, 10, 8, 0.75);
+            background: rgba(10, 8, 6, 0.70);
             backdrop-filter: blur(16px);
             border-radius: 24px;
             padding: 40px 35px;
             max-width: 560px;
             width: 100%;
-            border: 1px solid rgba(180, 120, 60, 0.10);
+            border: 1px solid rgba(180, 120, 60, 0.08);
             text-align: center;
         }
 
@@ -100,7 +100,7 @@
             position: absolute;
             top: -18px;
             right: -6px;
-            background: rgba(37, 211, 102, 0.10);
+            background: rgba(37, 211, 102, 0.12);
             border-radius: 50%;
             padding: 10px;
             border: 2px solid rgba(37, 211, 102, 0.10);
@@ -112,7 +112,7 @@
             height: 28px;
             fill: #25D366;
             display: block;
-            filter: drop-shadow(0 0 12px rgba(37, 211, 102, 0.15));
+            filter: drop-shadow(0 0 15px rgba(37, 211, 102, 0.15));
         }
 
         @keyframes waFloat {
@@ -126,7 +126,7 @@
             font-weight: 900;
             letter-spacing: 12px;
             color: #ffd700;
-            text-shadow: 0 0 40px rgba(255, 215, 0, 0.10);
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.08);
             font-family: 'Georgia', serif;
             margin-bottom: 2px;
         }
@@ -298,7 +298,7 @@
             display: none;
             position: relative;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.40);
             backdrop-filter: blur(12px);
             border-radius: 32px;
             padding: 40px 38px;
@@ -316,15 +316,15 @@
             height: 100%;
             object-fit: cover;
             border-radius: 32px;
-            opacity: 0.12;
+            opacity: 0.18;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Image de section (pleine largeur) */
+        /* Image de section (PLUS GRANDE) */
         .section-image {
             width: 100%;
-            max-height: 280px;
+            max-height: 350px;
             object-fit: cover;
             border-radius: 16px;
             margin-bottom: 14px;
@@ -592,7 +592,7 @@
             z-index: 2;
         }
 
-        /* === ACCESS OVERLAY (pour le code d'accès) === */
+        /* === ACCESS OVERLAY === */
         #access-overlay {
             position: fixed;
             inset: 0;
@@ -689,7 +689,7 @@
             .main-logo { font-size: 28px; letter-spacing: 6px; }
             .wa-top { top: -14px; right: -4px; padding: 6px; }
             .wa-top svg { width: 20px; height: 20px; }
-            .section-image { max-height: 200px; }
+            .section-image { max-height: 250px; }
             .counter { gap: 20px; flex-wrap: wrap; }
             .counter-item .number { font-size: 18px; }
             #access-overlay input { width: 200px; font-size: 16px; padding: 12px 16px; }
@@ -699,7 +699,7 @@
 </head>
 <body>
 
-    <!-- === IMAGE DE FOND (accueil) === -->
+    <!-- === IMAGE DE FOND (accueil - BIEN VISIBLE) === -->
     <img class="bg-image" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
     <div class="bg-overlay"></div>
 
@@ -727,7 +727,7 @@
     <!-- === BOUTON RETOUR === -->
     <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
 
-    <!-- === ACCESS OVERLAY (code d'accès) === -->
+    <!-- === ACCESS OVERLAY === -->
     <div id="access-overlay">
         <div class="lock-icon">⛔</div>
         <div class="logo">J<span>O</span>YBOY</div>
@@ -746,7 +746,7 @@
             </svg>
         </div>
 
-        <div class="pirate-icon" style="font-size:20px; opacity:0.4; letter-spacing:6px; margin-bottom:2px;">⚓ ☠️ ⚓</div>
+        <div style="font-size:20px; opacity:0.4; letter-spacing:6px; margin-bottom:2px;">⚓ ☠️ ⚓</div>
         <div class="main-title">J<span>O</span>YBOY</div>
         <div class="sub-title">⚔ Choose Your Path ⚔</div>
 
@@ -914,7 +914,7 @@
         });
 
         // ============================================
-        // OUVRIR FAMILLE (avec code)
+        // OUVRIR FAMILLE
         // ============================================
         function openFamily() {
             document.getElementById('access-overlay').classList.remove('hidden');
@@ -925,49 +925,30 @@
         }
 
         // ============================================
-        // CHOISIR FANS (sans code)
+        // CHOISIR
         // ============================================
+        var currentSection = 'family';
+
         function choosePath(section) {
-            if (section === 'fans') {
-                currentSection = 'fans';
-                document.getElementById('homeScreen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                document.getElementById('backBtn').classList.add('visible');
+            currentSection = section;
+            document.getElementById('homeScreen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('backBtn').classList.add('visible');
 
-                var newCount = incrementCount('joyboy_fans_visits');
-                document.getElementById('fansCount').textContent = newCount;
-
-                var badge = document.getElementById('sectionBadge');
-                var sub = document.getElementById('mainSub');
-                var status = document.getElementById('status-text');
-                var sectionImg = document.getElementById('sectionImage');
-                var sectionBg = document.getElementById('sectionBg');
-
-                badge.className = 'section-badge fans';
-                badge.textContent = '🔥 FANS';
-                sub.className = 'main-sub';
-                sub.textContent = '⚡ Protect Your Community';
-                status.textContent = 'Fill the form and click GENERATE';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.05)';
-                document.querySelector('.footer-link a').style.color = '#ff4444';
-                sectionImg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
-                sectionBg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
-            } else {
-                // Family (déjà géré par le code)
-                currentSection = 'family';
-                document.getElementById('homeScreen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                document.getElementById('backBtn').classList.add('visible');
-
-                var newCount = incrementCount('joyboy_family_visits');
+            var newCount = incrementCount(section === 'family' ? 'joyboy_family_visits' : 'joyboy_fans_visits');
+            if (section === 'family') {
                 document.getElementById('familyCount').textContent = newCount;
+            } else {
+                document.getElementById('fansCount').textContent = newCount;
+            }
 
-                var badge = document.getElementById('sectionBadge');
-                var sub = document.getElementById('mainSub');
-                var status = document.getElementById('status-text');
-                var sectionImg = document.getElementById('sectionImage');
-                var sectionBg = document.getElementById('sectionBg');
+            var badge = document.getElementById('sectionBadge');
+            var sub = document.getElementById('mainSub');
+            var status = document.getElementById('status-text');
+            var sectionImg = document.getElementById('sectionImage');
+            var sectionBg = document.getElementById('sectionBg');
 
+            if (section === 'family') {
                 badge.className = 'section-badge family';
                 badge.textContent = '🏠 FAMILY';
                 sub.className = 'main-sub';
@@ -977,6 +958,16 @@
                 document.querySelector('.footer-link a').style.color = '#ffd700';
                 sectionImg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
                 sectionBg.src = '1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg';
+            } else {
+                badge.className = 'section-badge fans';
+                badge.textContent = '🔥 FANS';
+                sub.className = 'main-sub';
+                sub.textContent = '⚡ Protect Your Community';
+                status.textContent = 'Fill the form and click GENERATE';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.05)';
+                document.querySelector('.footer-link a').style.color = '#ff4444';
+                sectionImg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
+                sectionBg.src = '92A22F95-4B54-4F3C-BC95-B2AF7F622654.jpeg';
             }
         }
 
