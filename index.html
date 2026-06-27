@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOYBOY · Signal Generator</title>
+    <title>JOYBOY · One Piece</title>
     <style>
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,19 +12,18 @@
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', serif;
             background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             position: relative;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 40px 20px;
+            overflow: hidden;
+            padding: 20px;
         }
 
-        /* ===== VIDÉO EN FOND ===== */
+        /* === VIDÉO EN FOND === */
         #bg-video {
             position: fixed;
             inset: 0;
@@ -33,7 +31,7 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            opacity: 0.35;
+            opacity: 0.40;
             pointer-events: none;
             filter: brightness(0.5) saturate(1.1);
         }
@@ -42,11 +40,11 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
             pointer-events: none;
         }
 
-        /* ===== PARTICULES D'OR ===== */
+        /* === PARTICULES === */
         .particle-container {
             position: fixed;
             inset: 0;
@@ -57,151 +55,220 @@
 
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            animation: floatParticle 12s ease-in-out infinite;
-            box-shadow: 0 0 15px currentColor;
+            animation: floatParticle 10s ease-in-out infinite;
+            box-shadow: 0 0 20px currentColor;
         }
 
         .particle.gold { background: #ffd700; color: #ffd700; }
-        .particle.red { background: #ff0000; color: #ff0000; }
-        .particle.green { background: #25D366; color: #25D366; }
+        .particle.red { background: #ff2200; color: #ff2200; }
 
         @keyframes floatParticle {
             0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
-            20% { opacity: 0.9; }
-            80% { opacity: 0.7; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.7; }
             100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
-        .particle:nth-child(1) { --tx: 300px; --ty: -200px; animation-delay: 0s; left: 5%; top: 10%; }
-        .particle:nth-child(2) { --tx: -250px; --ty: 300px; animation-delay: 1.5s; left: 25%; top: 40%; }
-        .particle:nth-child(3) { --tx: 350px; --ty: 200px; animation-delay: 3s; left: 55%; top: 25%; }
-        .particle:nth-child(4) { --tx: -300px; --ty: -250px; animation-delay: 4.5s; left: 75%; top: 60%; }
-        .particle:nth-child(5) { --tx: 200px; --ty: -350px; animation-delay: 6s; left: 15%; top: 70%; }
-        .particle:nth-child(6) { --tx: -200px; --ty: 400px; animation-delay: 7.5s; left: 45%; top: 5%; }
-        .particle:nth-child(7) { --tx: 400px; --ty: 150px; animation-delay: 9s; left: 65%; top: 50%; }
-        .particle:nth-child(8) { --tx: -350px; --ty: -300px; animation-delay: 10.5s; left: 35%; top: 80%; }
-        .particle:nth-child(9) { --tx: 250px; --ty: -280px; animation-delay: 2s; left: 85%; top: 20%; }
-        .particle:nth-child(10) { --tx: -180px; --ty: 320px; animation-delay: 6.5s; left: 50%; top: 90%; }
+        .particle:nth-child(1) { --tx: 300px; --ty: -250px; animation-delay: 0s; left: 5%; top: 10%; }
+        .particle:nth-child(2) { --tx: -280px; --ty: 350px; animation-delay: 1.2s; left: 20%; top: 35%; }
+        .particle:nth-child(3) { --tx: 400px; --ty: 220px; animation-delay: 2.4s; left: 50%; top: 20%; }
+        .particle:nth-child(4) { --tx: -350px; --ty: -280px; animation-delay: 3.6s; left: 70%; top: 55%; }
+        .particle:nth-child(5) { --tx: 250px; --ty: -400px; animation-delay: 4.8s; left: 10%; top: 70%; }
+        .particle:nth-child(6) { --tx: -220px; --ty: 450px; animation-delay: 6s; left: 40%; top: 5%; }
+        .particle:nth-child(7) { --tx: 450px; --ty: 180px; animation-delay: 7.2s; left: 60%; top: 45%; }
+        .particle:nth-child(8) { --tx: -400px; --ty: -350px; animation-delay: 8.4s; left: 30%; top: 80%; }
 
-        /* ===== ACCESS OVERLAY ===== */
-        #access-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 20px;
-        }
-        #access-overlay.hidden { display: none; }
-
-        #access-overlay .logo {
-            font-size: 52px;
-            font-weight: 900;
-            letter-spacing: 14px;
-            color: #fff;
-            text-shadow: 0 0 60px rgba(255, 215, 0, 0.5), 0 0 120px rgba(255, 215, 0, 0.2);
-            font-family: 'Courier New', monospace;
+        /* === CARTE PRINCIPALE === */
+        .scroll-effect {
+            position: relative;
+            z-index: 10;
+            background: rgba(15, 10, 8, 0.80);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 50px 45px;
+            max-width: 560px;
+            width: 100%;
+            border: 1px solid rgba(180, 120, 60, 0.15);
+            box-shadow: 0 0 80px rgba(180, 120, 60, 0.03);
             text-align: center;
         }
-        #access-overlay .logo span { color: #ffd700; }
 
-        #access-overlay .sub {
+        /* === TITRE JOYBOY === */
+        .main-title {
+            font-size: 58px;
+            font-weight: 900;
+            letter-spacing: 14px;
             color: #ffd700;
+            text-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.15),
+                0 4px 30px rgba(0, 0, 0, 0.5);
+            font-family: 'Georgia', serif;
+            margin-bottom: 4px;
+        }
+        .main-title span {
+            color: #ff2200;
+            text-shadow: 0 0 50px rgba(255, 34, 0, 0.2);
+        }
+
+        .main-title::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 2px;
+            margin: 10px auto 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+        }
+
+        /* === SOUS-TITRE === */
+        .sub-title {
+            color: rgba(255, 215, 0, 0.5);
             font-size: 14px;
             letter-spacing: 10px;
             text-transform: uppercase;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            font-family: 'Georgia', serif;
+            margin-top: 16px;
+            margin-bottom: 34px;
+            font-weight: 300;
         }
 
-        #access-overlay .lock-icon {
-            font-size: 45px;
-            animation: pulse 2s ease-in-out infinite;
+        .pirate-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 2px;
+            opacity: 0.5;
+            letter-spacing: 6px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.15); opacity: 1; }
-        }
-
-        #access-overlay .code-input {
+        /* === BOUTONS === */
+        .btn-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            max-width: 320px;
+            gap: 16px;
+            margin: 6px 0 10px;
         }
 
-        #access-overlay input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            padding: 14px 24px;
-            font-size: 20px;
-            color: #fff;
-            text-align: center;
-            width: 100%;
-            outline: none;
-            letter-spacing: 6px;
-            font-family: 'Courier New', monospace;
-            transition: 0.3s;
-        }
-        #access-overlay input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
-        }
-        #access-overlay .btn-access {
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #000;
+        .btn-path {
+            padding: 18px 30px;
             border: none;
-            padding: 14px 56px;
-            border-radius: 40px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            font-family: 'Courier New', monospace;
+            transition: all 0.4s ease;
+            font-family: 'Georgia', serif;
             letter-spacing: 4px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
-            transition: 0.3s;
-            width: 100%;
-        }
-        #access-overlay .btn-access:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
-        }
-        #access-overlay .error-msg {
-            color: #ff4444;
-            font-size: 14px;
-            min-height: 20px;
-            font-family: 'Courier New', monospace;
-        }
-        #access-overlay .info-codes {
-            color: #666;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            line-height: 2;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-        #access-overlay .info-codes .family-code {
-            color: #ffd700;
-            font-weight: bold;
-        }
-        #access-overlay .info-codes .fans-code {
-            color: #ff4444;
-            font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ===== MAIN CONTENT ===== */
+        .btn-family {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.10), rgba(255, 215, 0, 0.03));
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+        .btn-family:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.10);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.18), rgba(255, 215, 0, 0.05));
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-fans {
+            background: linear-gradient(135deg, rgba(255, 34, 0, 0.10), rgba(255, 34, 0, 0.03));
+            color: #ff4444;
+            border: 1px solid rgba(255, 34, 0, 0.15);
+        }
+        .btn-fans:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(255, 34, 0, 0.10);
+            background: linear-gradient(135deg, rgba(255, 34, 0, 0.18), rgba(255, 34, 0, 0.05));
+            border-color: rgba(255, 34, 0, 0.3);
+        }
+
+        .btn-path .icon {
+            margin-right: 10px;
+        }
+
+        /* === LOGO WHATSAPP === */
+        .wa-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 24px;
+            opacity: 0.2;
+            transition: 0.3s;
+        }
+        .wa-footer:hover {
+            opacity: 0.5;
+        }
+
+        .wa-footer svg {
+            width: 22px;
+            height: 22px;
+            fill: #25D366;
+        }
+
+        .wa-footer span {
+            color: #666;
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-family: 'Georgia', serif;
+        }
+
+        /* === PIED DE PAGE === */
+        .footer {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 2px;
+            font-family: 'Georgia', serif;
+        }
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            opacity: 0.7;
+        }
+
+        /* === BOUTON SON === */
+        .sound-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            color: #aaa;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .sound-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+        }
+        .sound-btn.active {
+            color: #25D366;
+            border-color: rgba(37, 211, 102, 0.15);
+        }
+
+        /* === MAIN CONTENT === */
         #main-content {
             display: none;
             position: relative;
@@ -216,162 +283,135 @@
             border: 1px solid rgba(255, 215, 0, 0.05);
         }
 
-        /* === BADGE SECTION === */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            color: #aaa;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+        }
+        .back-btn.visible {
+            display: flex;
+        }
+
         .section-badge {
             display: inline-block;
-            padding: 8px 24px;
+            padding: 6px 20px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 14px;
+            font-family: 'Georgia', serif;
+            margin-bottom: 12px;
             text-align: center;
             width: 100%;
         }
         .section-badge.family {
-            background: rgba(255, 215, 0, 0.12);
+            background: rgba(255, 215, 0, 0.08);
             color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            animation: badgeGlowGold 2s ease-in-out infinite;
+            border: 1px solid rgba(255, 215, 0, 0.08);
         }
         .section-badge.fans {
-            background: rgba(255, 0, 0, 0.12);
+            background: rgba(255, 34, 0, 0.08);
             color: #ff4444;
-            border: 1px solid rgba(255, 0, 0, 0.15);
-            animation: badgeGlowRed 2s ease-in-out infinite;
-        }
-
-        @keyframes badgeGlowGold {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.05); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.15); }
-        }
-        @keyframes badgeGlowRed {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.05); }
-            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.15); }
+            border: 1px solid rgba(255, 34, 0, 0.08);
         }
 
         .header-image {
             width: 100%;
-            max-height: 280px;
+            max-height: 250px;
             object-fit: cover;
             border-radius: 16px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255, 215, 0, 0.05);
+            margin-bottom: 14px;
         }
 
-        /* === LOGO WHATSAPP + JOYBOY === */
         .logo-wa-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             margin-bottom: 2px;
         }
 
         .wa-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             fill: #25D366;
-            filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.2));
+            filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.1));
             animation: waPulse 2.5s ease-in-out infinite;
             flex-shrink: 0;
         }
 
         @keyframes waPulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.2)); }
-            50% { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(37, 211, 102, 0.4)); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
         }
 
         .main-logo {
-            font-size: 44px;
+            font-size: 38px;
             font-weight: 900;
-            letter-spacing: 12px;
+            letter-spacing: 10px;
             color: #ffffff;
-            text-shadow: 0 0 60px rgba(255, 215, 0, 0.15);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.08);
             text-align: center;
-            font-family: 'Courier New', monospace;
+            font-family: 'Georgia', serif;
             margin-bottom: 0;
         }
-        .main-logo span { 
-            color: #ffd700;
-            text-shadow: 0 0 60px rgba(255, 215, 0, 0.3);
-        }
+        .main-logo span { color: #ffd700; }
 
         .main-sub {
             text-align: center;
             color: #ffd700;
-            font-size: 12px;
-            letter-spacing: 10px;
+            font-size: 11px;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.06);
-            padding-bottom: 16px;
-            margin-bottom: 22px;
-            font-family: 'Courier New', monospace;
-            opacity: 0.7;
-        }
-
-        .main-sub.family-sub {
-            color: #ffd700;
-        }
-        .main-sub.fans-sub {
-            color: #ff4444;
-        }
-
-        /* === BOUTON SON === */
-        .sound-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            color: #aaa;
-            font-size: 22px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-            font-family: 'Courier New', monospace;
-        }
-        .sound-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.05);
-        }
-        .sound-btn.active {
-            color: #25D366;
-            border-color: rgba(37, 211, 102, 0.3);
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.04);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            opacity: 0.5;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-align: left;
         }
         .form-group label {
-            color: #ccc;
-            font-size: 13px;
+            color: #aaa;
+            font-size: 11px;
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             display: block;
-            margin-bottom: 5px;
-            font-family: 'Courier New', monospace;
+            margin-bottom: 4px;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 16px;
+            padding: 10px 14px;
             color: #eee;
-            font-size: 15px;
-            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-family: 'Georgia', serif;
             outline: none;
             transition: 0.3s;
         }
@@ -383,32 +423,31 @@
             color: #eee;
         }
         .form-group textarea {
-            min-height: 60px;
+            min-height: 56px;
             resize: vertical;
-            font-family: 'Segoe UI', sans-serif;
         }
 
         .generated-box {
             background: rgba(255, 215, 0, 0.02);
-            border-radius: 16px;
-            padding: 18px 20px;
-            margin: 18px 0 20px;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 16px 0 18px;
             text-align: left;
             display: none;
-            max-height: 450px;
+            max-height: 400px;
             overflow-y: auto;
             min-height: 50px;
-            border-left: 2px solid rgba(255, 215, 0, 0.1);
+            border-left: 2px solid rgba(255, 215, 0, 0.06);
         }
         .generated-box.visible { display: block; }
         .generated-box .msg-title {
             color: #ffd700;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            font-family: 'Courier New', monospace;
-            opacity: 0.6;
+            margin-bottom: 6px;
+            font-family: 'Georgia', serif;
+            opacity: 0.4;
         }
         .generated-box .msg-content {
             color: #eee;
@@ -416,7 +455,7 @@
             line-height: 1.9;
             white-space: pre-wrap;
             word-break: break-word;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Georgia', serif;
         }
         .generated-box .cursor-blink {
             display: inline-block;
@@ -432,33 +471,33 @@
             50% { opacity: 0; }
         }
 
-        .btn-group {
+        .btn-group-form {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
-        .btn {
-            padding: 14px 34px;
+        .btn-form {
+            padding: 12px 28px;
             border: none;
-            border-radius: 50px;
-            font-size: 15px;
+            border-radius: 40px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s ease;
             letter-spacing: 1px;
             flex: 1 1 auto;
-            min-width: 130px;
-            font-family: 'Courier New', monospace;
+            min-width: 120px;
+            font-family: 'Georgia', serif;
         }
         .btn-generate {
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #000;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.06);
         }
         .btn-generate:hover {
-            transform: scale(1.04);
-            box-shadow: 0 0 60px rgba(255, 215, 0, 0.25);
+            transform: scale(1.03);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.12);
         }
         .btn-generate:disabled {
             opacity: 0.4;
@@ -481,12 +520,10 @@
         .btn-whatsapp {
             background: #25D366;
             color: #fff;
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.15);
         }
         .btn-whatsapp:hover {
             background: #1da851;
-            transform: scale(1.04);
-            box-shadow: 0 0 50px rgba(37, 211, 102, 0.25);
+            transform: scale(1.03);
         }
         .btn-whatsapp:disabled {
             opacity: 0.3;
@@ -496,86 +533,81 @@
 
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 90px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            padding: 12px 28px;
-            border-radius: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            padding: 10px 24px;
+            border-radius: 30px;
             color: #ccc;
-            font-size: 13px;
+            font-size: 12px;
             z-index: 1002;
             opacity: 0;
             transition: 0.4s;
             pointer-events: none;
-            font-family: 'Courier New', monospace;
+            font-family: 'Georgia', serif;
         }
         .toast.show { opacity: 1; }
 
         .status-text {
             color: #888;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             margin-top: 8px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Georgia', serif;
             min-height: 18px;
-        }
-        .status-text.family-status {
-            color: #ffd700;
-        }
-        .status-text.fans-status {
-            color: #ff4444;
         }
 
         .footer-link {
             text-align: center;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            font-family: 'Courier New', monospace;
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            font-family: 'Georgia', serif;
         }
         .footer-link a {
             color: #ffd700;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 3px;
             transition: 0.3s;
-            opacity: 0.4;
+            opacity: 0.25;
         }
         .footer-link a:hover {
-            opacity: 0.8;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+            opacity: 0.6;
         }
 
         .whatsapp-note {
             text-align: center;
-            color: #555;
+            color: #444;
             font-size: 10px;
-            margin-top: 8px;
-            font-family: 'Courier New', monospace;
+            margin-top: 6px;
+            font-family: 'Georgia', serif;
             letter-spacing: 1px;
         }
 
         @media (max-width: 600px) {
-            #main-content { padding: 24px 16px; margin: 10px; }
+            .scroll-effect { padding: 30px 20px; }
+            .main-title { font-size: 38px; letter-spacing: 10px; }
+            .sub-title { font-size: 11px; letter-spacing: 6px; }
+            .btn-path { font-size: 15px; padding: 14px 20px; }
+            .back-btn { top: 10px; left: 10px; width: 36px; height: 36px; font-size: 16px; }
+            .sound-btn { bottom: 20px; right: 20px; width: 38px; height: 38px; font-size: 16px; }
+            #main-content { padding: 24px 16px; }
             .main-logo { font-size: 30px; letter-spacing: 8px; }
-            .logo-wa-container { gap: 10px; }
-            .wa-icon { width: 32px; height: 32px; }
             .header-image { max-height: 180px; }
-            .sound-btn { bottom: 80px; right: 16px; width: 42px; height: 42px; font-size: 18px; }
-            #access-overlay input { font-size: 16px; padding: 12px 16px; }
+            .wa-icon { width: 30px; height: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- === VIDÉO EN FOND === -->
+    <!-- === VIDÉO === -->
     <video autoplay loop playsinline id="bg-video">
         <source src="IMG_6901.MOV" type="video/mp4">
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo.
     </video>
     <div class="bg-overlay"></div>
 
@@ -584,13 +616,11 @@
         <div class="particle gold"></div>
         <div class="particle red"></div>
         <div class="particle gold"></div>
-        <div class="particle green"></div>
         <div class="particle red"></div>
         <div class="particle gold"></div>
-        <div class="particle green"></div>
         <div class="particle red"></div>
         <div class="particle gold"></div>
-        <div class="particle green"></div>
+        <div class="particle red"></div>
     </div>
 
     <!-- === MUSIQUE === -->
@@ -602,33 +632,40 @@
     <!-- === BOUTON SON === -->
     <button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔇</button>
 
-    <!-- === ACCESS OVERLAY === -->
-    <div id="access-overlay">
-        <div class="lock-icon">⛔</div>
-        <div class="logo">J<span>O</span>YBOY</div>
-        <div class="sub">⚓ Choose Your Path ⚓</div>
+    <!-- === BOUTON RETOUR === -->
+    <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
 
-        <div class="code-input">
-            <input type="password" id="access-input" placeholder="••••" maxlength="10" autofocus>
-            <button class="btn-access" onclick="checkAccess()">⚡ ENTER</button>
+    <!-- === ÉCRAN D'ACCUEIL === -->
+    <div id="homeScreen" class="scroll-effect">
+        <div class="pirate-icon">⚓ ☠️ ⚓</div>
+        <div class="main-title">J<span>O</span>YBOY</div>
+        <div class="sub-title">⚔ Choose Your Path ⚔</div>
+
+        <div class="btn-group">
+            <button class="btn-path btn-family" onclick="choosePath('family')">
+                <span class="icon">🏠</span> FAMILY
+            </button>
+            <button class="btn-path btn-fans" onclick="choosePath('fans')">
+                <span class="icon">🔥</span> FANS
+            </button>
         </div>
 
-        <div class="error-msg" id="access-error"></div>
+        <div class="wa-footer">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>⚡ JOIN US</span>
+        </div>
 
-        <div class="info-codes">
-            🏠 <span class="family-code">FAMILY2025</span> — For Family<br>
-            🔥 <span class="fans-code">FANS2025</span> — For Fans
+        <div class="footer">
+            <a href="https://ablaye2020.github.io" target="_blank">ablaye2020.github.io</a>
         </div>
     </div>
 
     <!-- === MAIN CONTENT === -->
     <div id="main-content">
-        <!-- BADGE (affiché dynamiquement) -->
         <div id="sectionBadge" class="section-badge family">🏠 FAMILY</div>
 
         <img class="header-image" id="header-image" src="53517900-6B79-4E2E-92C0-16CD724C4CAE.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
 
-        <!-- === LOGO WHATSAPP + JOYBOY === -->
         <div class="logo-wa-container">
             <svg class="wa-icon" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -675,10 +712,10 @@
 
         <div class="status-text" id="status-text">Fill the form and click GENERATE</div>
 
-        <div class="btn-group">
-            <button class="btn btn-generate" id="btn-generate" onclick="startGeneration()">⚡ GENERATE</button>
-            <button class="btn btn-copy" id="btn-copy" disabled onclick="copyMessage()">📋 COPY</button>
-            <button class="btn btn-whatsapp" id="btn-wa" disabled onclick="sendWhatsApp()">💬 WHATSAPP</button>
+        <div class="btn-group-form">
+            <button class="btn-form btn-generate" id="btn-generate" onclick="startGeneration()">⚡ GENERATE</button>
+            <button class="btn-form btn-copy" id="btn-copy" disabled onclick="copyMessage()">📋 COPY</button>
+            <button class="btn-form btn-whatsapp" id="btn-wa" disabled onclick="sendWhatsApp()">💬 WHATSAPP</button>
         </div>
 
         <div class="whatsapp-note">📌 Message copied automatically — then paste in WhatsApp Support chat</div>
@@ -716,41 +753,16 @@
         }
 
         // ============================================
-        // CODE D'ACCÈS : FAMILY2025 ou FANS2025
+        // CHOISIR UN CHEMIN
         // ============================================
-        var currentSection = 'family'; // 'family' ou 'fans'
+        var currentSection = 'family';
 
-        function checkAccess() {
-            var input = document.getElementById('access-input');
-            var error = document.getElementById('access-error');
-            var code = input.value.trim().toUpperCase();
+        function choosePath(section) {
+            currentSection = section;
+            document.getElementById('homeScreen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('backBtn').classList.add('visible');
 
-            if (code === 'FAMILY2025') {
-                document.getElementById('access-overlay').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                error.textContent = '';
-                currentSection = 'family';
-                applySectionStyle('family');
-            } else if (code === 'FANS2025') {
-                document.getElementById('access-overlay').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                error.textContent = '';
-                currentSection = 'fans';
-                applySectionStyle('fans');
-            } else {
-                error.textContent = '❌ Code incorrect. Réessaie.';
-                input.value = '';
-                input.focus();
-            }
-        }
-
-        document.getElementById('access-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                checkAccess();
-            }
-        });
-
-        function applySectionStyle(section) {
             var badge = document.getElementById('sectionBadge');
             var sub = document.getElementById('mainSub');
             var status = document.getElementById('status-text');
@@ -758,27 +770,30 @@
             if (section === 'family') {
                 badge.className = 'section-badge family';
                 badge.textContent = '🏠 FAMILY';
-                sub.className = 'main-sub family-sub';
+                sub.className = 'main-sub';
                 sub.textContent = '❤️ Protect Your Family';
-                status.className = 'status-text family-status';
                 status.textContent = 'Fill the form and click GENERATE';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.08)';
                 document.querySelector('.footer-link a').style.color = '#ffd700';
-                // Changer la bordure
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 215, 0, 0.15)';
             } else {
                 badge.className = 'section-badge fans';
                 badge.textContent = '🔥 FANS';
-                sub.className = 'main-sub fans-sub';
+                sub.className = 'main-sub';
                 sub.textContent = '⚡ Protect Your Community';
-                status.className = 'status-text fans-status';
                 status.textContent = 'Fill the form and click GENERATE';
+                document.getElementById('main-content').style.borderColor = 'rgba(255, 34, 0, 0.08)';
                 document.querySelector('.footer-link a').style.color = '#ff4444';
-                document.getElementById('main-content').style.borderColor = 'rgba(255, 0, 0, 0.15)';
             }
         }
 
+        function goBack() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('homeScreen').style.display = 'block';
+            document.getElementById('backBtn').classList.remove('visible');
+        }
+
         // ============================================
-        // MESSAGES ULTRA CONVAINCANTS (FAMILLE / FANS)
+        // MESSAGES
         // ============================================
         var messageIndex = 0;
 
@@ -814,7 +829,7 @@
 
             var violationText = violationTexts[type] || violationTexts.other;
 
-            // ========== MESSAGES FAMILLE ==========
+            // Messages FAMILLE
             var familyMessages = [
                 "Dear WhatsApp Support Team,\n\nI am writing to you today with a heavy heart because my family is going through something terrible. A person on WhatsApp has been sending threatening messages to my wife and children. They have been insulting them, making them feel unsafe, and even threatening to harm them. My children are scared to even open the app now. This person knows our personal information and is using it to intimidate us.\n\nI have tried blocking them but they keep creating new accounts. I've reported them before but nothing changed. I am genuinely scared for my family's safety. We are not sleeping well. My wife is stressed, my kids are anxious, and I feel helpless because I can't stop this person.\n\nI am asking you, from the bottom of my heart, to please investigate this account and ban it permanently. I have screenshots of everything — the threats, the insults, the harassment. I can share all of it if needed. Please don't let this person continue to terrorize my family.\n\nThank you for reading this. I hope you can help us find peace again.\n\nSincerely,\nA father who just wants to protect his family",
 
@@ -823,7 +838,7 @@
                 "Dear WhatsApp Team,\n\nI am writing to file a formal complaint against a user who has been harassing my family. I am angry — not just because of what they are doing, but because I feel like WhatsApp is not doing enough to stop it.\n\nThis person has been sending threatening messages to my children. They are teenagers, and they are scared. They don't want to use WhatsApp anymore because of this person. I have tried everything: blocking, reporting, ignoring. Nothing works. They just come back with a new number or a new account.\n\nI want to know: what does it take for WhatsApp to take action? How many reports do we need to make before someone actually investigates? I have sent you screenshots, I have given you the details, and yet nothing has changed.\n\nI am not asking for much. I am asking for you to do your job. Investigate this account. Ban this person. Protect my family from this harassment. I have evidence and I am ready to share it all.\n\nPlease respond to this message with confirmation of action taken. I am not going to let this go.\n\nRegards,\nA frustrated father who has had enough"
             ];
 
-            // ========== MESSAGES FANS ==========
+            // Messages FANS
             var fansMessages = [
                 "Dear WhatsApp Support Team,\n\nI am writing to you because my fans are being targeted by scammers on your platform. Someone is pretending to be me and asking my followers for money. They are using my name, my photos, and my reputation to trick people who trust me.\n\nThis is not just a scam — it's a betrayal. My fans have supported me through everything. They believe in me. And now, someone is using that trust to steal from them. I feel responsible. I feel like I failed them by not catching this sooner.\n\nI have received over 100 messages from fans telling me they were contacted by this impersonator. Some of them almost sent money. This is unacceptable. I need your help to shut this down immediately.\n\nI have screenshots of the impersonator's conversations. I have the account details. I am ready to share everything with you. Please investigate this account and ban it permanently. My fans deserve protection.\n\nThank you for taking this seriously.\n\nSincerely,\nA creator who stands by his fans",
 
@@ -835,15 +850,16 @@
             var messages = (currentSection === 'family') ? familyMessages : fansMessages;
             var msg = messages[messageIndex % messages.length];
 
-            // Ajouter les infos utilisateur
-            msg = msg.replace('[numéro ou nom]', (nom || 'Unknown') + (numero ? ' (' + numero + ')' : ''));
+            // Remplacer les informations utilisateur
+            if (nom) msg = msg.replace('[numéro ou nom]', nom + (numero ? ' (' + numero + ')' : ''));
+            if (numero && !nom) msg = msg.replace('[numéro ou nom]', numero);
 
             messageIndex++;
             return msg;
         }
 
         // ============================================
-        // GÉNÉRATION PROGRESSIVE
+        // GÉNÉRATION
         // ============================================
         var isGenerating = false;
         var displayText = '';
@@ -884,7 +900,6 @@
                     btnCopy.disabled = false;
                     btnWa.disabled = false;
                     status.textContent = '✅ Message ready';
-                    status.style.color = (currentSection === 'family') ? '#ffd700' : '#ff4444';
                     showToast('✅ Message generated');
                 }
             }
