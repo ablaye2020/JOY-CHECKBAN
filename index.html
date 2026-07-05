@@ -21,9 +21,10 @@
             position: relative;
             overflow: hidden;
             padding: 20px;
+            cursor: pointer;
         }
 
-        /* ===== FOND ANIMÉ AVEC DÉFILEMENT RAPIDE ===== */
+        /* ===== FOND ANIMÉ AVEC ZOOM ET DÉFILEMENT RAPIDE ===== */
         .bg-wrapper {
             position: fixed;
             inset: 0;
@@ -34,30 +35,41 @@
 
         .bg-slider {
             display: flex;
-            width: 200%;
+            width: 300%;
             height: 100%;
-            animation: slideBackground 24s linear infinite;
+            animation: slideZoom 18s linear infinite;
         }
 
         .bg-slider img {
-            width: 50%;
+            width: 33.333%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.85;        /* plus clair */
-            filter: brightness(1.1) saturate(1.1); /* plus lumineux */
+            opacity: 0.9;
+            filter: brightness(1.05) saturate(1.1);
             flex-shrink: 0;
+            transform: scale(1.1);
+            animation: zoomIn 18s linear infinite alternate;
         }
 
-        @keyframes slideBackground {
+        .bg-slider img:nth-child(1) { animation-delay: 0s; }
+        .bg-slider img:nth-child(2) { animation-delay: -6s; }
+        .bg-slider img:nth-child(3) { animation-delay: -12s; }
+
+        @keyframes slideZoom {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-66.666%); }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.3); }
         }
 
         .bg-overlay {
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
             pointer-events: none;
         }
 
@@ -138,37 +150,96 @@
             50% { transform: translateY(-6px) rotate(4deg); }
         }
 
-        /* ===== TITRE ===== */
+        /* ===== TITRE AVEC DÉGRADÉ ET OMBRE COLORÉE ===== */
         .title {
             font-size: 50px;
             font-weight: 900;
             letter-spacing: 14px;
-            color: #ffd700;
-            text-shadow: 0 0 60px rgba(255,215,0,0.08);
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 40%, #ff2200 70%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2));
             font-family: 'Georgia', serif;
             margin-bottom: 4px;
+            animation: titleShine 4s ease-in-out infinite;
         }
-        .title span { color: #ff2200; text-shadow: 0 0 40px rgba(255,34,0,0.1); }
+        .title span { 
+            background: linear-gradient(135deg, #ff2200, #ff6b6b, #ff2200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.2)); }
+            50% { filter: drop-shadow(0 0 60px rgba(255, 215, 0, 0.5)); }
+        }
+
         .title::after {
             content: '';
             display: block;
             width: 40%;
             height: 2px;
             margin: 8px auto 0;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), transparent);
+            background: linear-gradient(90deg, transparent, #ffd700, #ff2200, #ffd700, transparent);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
         }
 
+        /* ===== SOUS-TITRE AVEC BALANCE ET DÉGRADÉ ===== */
         .subhead {
-            color: rgba(255, 215, 0, 0.4);
-            font-size: 13px;
-            letter-spacing: 10px;
+            font-size: 14px;
+            letter-spacing: 8px;
             text-transform: uppercase;
             margin-top: 12px;
             margin-bottom: 22px;
             font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.2));
+            animation: subShine 3s ease-in-out infinite;
+        }
+        @keyframes subShine {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.2)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 34, 0, 0.3)); }
+        }
+        .subhead .balance {
+            font-size: 22px;
+            -webkit-text-fill-color: initial;
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255,215,0,0.3);
         }
 
-        /* ===== IMAGE D'ACCUEIL AVEC EFFET DE MOUVEMENT ===== */
+        /* ===== PHRASE "Le Respect ne se demande pas" ===== */
+        .respect-phrase {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(255,215,0,0.2));
+            margin-bottom: 6px;
+            font-family: 'Georgia', serif;
+            animation: respectGlow 3s ease-in-out infinite;
+            padding: 6px 0;
+            border-top: 1px solid rgba(255, 215, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+        }
+        @keyframes respectGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.1)); }
+            50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.4)); }
+        }
+
+        /* ===== IMAGE D'ACCUEIL ===== */
         .home-img {
             width: 100%;
             max-height: 280px;
@@ -186,7 +257,7 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* ===== BOUTONS ===== */
+        /* ===== BOUTONS AVEC COULEURS VIVES ===== */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -212,32 +283,36 @@
         .btn-path .icon { margin-right: 14px; font-size: 24px; }
 
         .btn-family {
-            background: linear-gradient(145deg, rgba(255,215,0,0.12), rgba(255,215,0,0.02));
+            background: linear-gradient(145deg, rgba(255,215,0,0.25), rgba(255,215,0,0.05));
             color: #ffd700;
-            border: 2px solid rgba(255,215,0,0.12);
-            text-shadow: 0 0 30px rgba(255,215,0,0.05);
+            border: 2px solid rgba(255,215,0,0.25);
+            text-shadow: 0 0 40px rgba(255,215,0,0.3);
+            box-shadow: 0 0 40px rgba(255,215,0,0.05);
         }
         .btn-family:hover {
             transform: scale(1.03);
-            background: linear-gradient(145deg, rgba(255,215,0,0.2), rgba(255,215,0,0.04));
-            border-color: rgba(255,215,0,0.25);
-            box-shadow: 0 8px 40px rgba(255,215,0,0.1);
+            background: linear-gradient(145deg, rgba(255,215,0,0.35), rgba(255,215,0,0.08));
+            border-color: rgba(255,215,0,0.4);
+            box-shadow: 0 8px 50px rgba(255,215,0,0.15);
+            text-shadow: 0 0 60px rgba(255,215,0,0.5);
         }
 
         .btn-fans {
-            background: linear-gradient(145deg, rgba(255,34,0,0.12), rgba(255,34,0,0.02));
+            background: linear-gradient(145deg, rgba(255,34,0,0.25), rgba(255,34,0,0.05));
             color: #ff6b6b;
-            border: 2px solid rgba(255,34,0,0.12);
-            text-shadow: 0 0 30px rgba(255,34,0,0.05);
+            border: 2px solid rgba(255,34,0,0.25);
+            text-shadow: 0 0 40px rgba(255,34,0,0.3);
+            box-shadow: 0 0 40px rgba(255,34,0,0.05);
         }
         .btn-fans:hover {
             transform: scale(1.03);
-            background: linear-gradient(145deg, rgba(255,34,0,0.2), rgba(255,34,0,0.04));
-            border-color: rgba(255,34,0,0.25);
-            box-shadow: 0 8px 40px rgba(255,34,0,0.1);
+            background: linear-gradient(145deg, rgba(255,34,0,0.35), rgba(255,34,0,0.08));
+            border-color: rgba(255,34,0,0.4);
+            box-shadow: 0 8px 50px rgba(255,34,0,0.15);
+            text-shadow: 0 0 60px rgba(255,34,0,0.5);
         }
 
-        /* ===== COMPTEURS ===== */
+        /* ===== COMPTEURS COLORÉS ===== */
         .counters {
             display: flex;
             justify-content: center;
@@ -250,19 +325,26 @@
         .counter-item .num {
             font-size: 28px;
             font-weight: 700;
-            color: #ffd700;
             display: block;
             letter-spacing: 3px;
-            text-shadow: 0 0 30px rgba(255,215,0,0.05);
+        }
+        .counter-item .num.family-num {
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+        .counter-item .num.fans-num {
+            color: #ff6b6b;
+            text-shadow: 0 0 30px rgba(255,34,0,0.2);
         }
         .counter-item .lbl {
             font-size: 10px;
             text-transform: uppercase;
-            color: #777;
+            color: #999;
             letter-spacing: 4px;
             margin-top: 2px;
         }
-        .counter-item.fans .num { color: #ff6b6b; }
+        .counter-item.fans .lbl { color: #ff6b6b; }
+        .counter-item.family .lbl { color: #ffd700; }
 
         /* ===== LIENS ===== */
         .footer-links {
@@ -274,16 +356,24 @@
             gap: 4px;
         }
         .footer-links a {
-            color: #ffd700;
             text-decoration: none;
             font-size: 11px;
             letter-spacing: 3px;
-            opacity: 0.25;
             transition: 0.3s;
             font-family: 'Georgia', serif;
         }
-        .footer-links a:hover { opacity: 0.8; }
-        .footer-links .wa-channel { color: #25D366; opacity: 0.2; }
+        .footer-links a:first-child {
+            color: #ffd700;
+            opacity: 0.4;
+            text-shadow: 0 0 20px rgba(255,215,0,0.1);
+        }
+        .footer-links a:first-child:hover { opacity: 0.9; }
+        .footer-links .wa-channel {
+            color: #25D366;
+            opacity: 0.3;
+            text-shadow: 0 0 20px rgba(37,211,102,0.1);
+        }
+        .footer-links .wa-channel:hover { opacity: 0.9; }
 
         /* ===== CONTENU PRINCIPAL (après accès) ===== */
         #main-content {
@@ -346,8 +436,18 @@
             position: relative;
             z-index: 2;
         }
-        .badge-section.family { background: rgba(255,215,0,0.06); color: #ffd700; border: 1px solid rgba(255,215,0,0.06); }
-        .badge-section.fans { background: rgba(255,34,0,0.06); color: #ff6b6b; border: 1px solid rgba(255,34,0,0.06); }
+        .badge-section.family {
+            background: rgba(255,215,0,0.08);
+            color: #ffd700;
+            border: 1px solid rgba(255,215,0,0.1);
+            text-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+        .badge-section.fans {
+            background: rgba(255,34,0,0.08);
+            color: #ff6b6b;
+            border: 1px solid rgba(255,34,0,0.1);
+            text-shadow: 0 0 30px rgba(255,34,0,0.2);
+        }
 
         .logo-wa-row {
             display: flex;
@@ -372,15 +472,22 @@
             font-size: 38px;
             font-weight: 900;
             letter-spacing: 10px;
-            color: #fff;
-            text-shadow: 0 0 40px rgba(255,215,0,0.03);
+            background: linear-gradient(135deg, #ffd700, #ff8c00, #ff2200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(255,215,0,0.1));
             font-family: 'Georgia', serif;
         }
-        .main-logo span { color: #ffd700; }
+        .main-logo span { 
+            background: linear-gradient(135deg, #ff2200, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         .main-sub {
             text-align: center;
-            color: #ffd700;
             font-size: 11px;
             letter-spacing: 8px;
             text-transform: uppercase;
@@ -388,9 +495,14 @@
             padding-bottom: 14px;
             margin-bottom: 18px;
             font-family: 'Georgia', serif;
-            opacity: 0.3;
+            opacity: 0.6;
             position: relative;
             z-index: 2;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.1));
         }
 
         /* ===== FORMULAIRE ===== */
@@ -401,7 +513,7 @@
             z-index: 2;
         }
         .form-group label {
-            color: #aaa;
+            color: #ccc;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 2px;
@@ -409,6 +521,7 @@
             margin-bottom: 4px;
             text-transform: uppercase;
             font-family: 'Georgia', serif;
+            text-shadow: 0 0 20px rgba(255,215,0,0.05);
         }
         .form-group input,
         .form-group select,
@@ -416,7 +529,7 @@
             width: 100%;
             background: rgba(255,255,255,0.02);
             border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,215,0,0.1);
             padding: 10px 14px;
             color: #eee;
             font-size: 14px;
@@ -428,7 +541,8 @@
         .form-group select:focus,
         .form-group textarea:focus {
             border-bottom: 1px solid #ffd700;
-            background: rgba(255,215,0,0.01);
+            background: rgba(255,215,0,0.02);
+            box-shadow: 0 0 30px rgba(255,215,0,0.02);
         }
         .form-group select option { background: #1a1a1a; color: #eee; }
         .form-group textarea { min-height: 54px; resize: vertical; }
@@ -444,7 +558,7 @@
             max-height: 380px;
             overflow-y: auto;
             min-height: 50px;
-            border-left: 2px solid rgba(255,215,0,0.06);
+            border-left: 2px solid rgba(255,215,0,0.1);
             position: relative;
             z-index: 2;
         }
@@ -456,7 +570,8 @@
             text-transform: uppercase;
             margin-bottom: 6px;
             font-family: 'Georgia', serif;
-            opacity: 0.3;
+            opacity: 0.5;
+            text-shadow: 0 0 20px rgba(255,215,0,0.1);
         }
         .generated-box .msg-content {
             color: #eee;
@@ -501,9 +616,9 @@
         .btn-generate {
             background: linear-gradient(135deg, #ffd700, #f0a500);
             color: #000;
-            box-shadow: 0 0 30px rgba(255,215,0,0.05);
+            box-shadow: 0 0 30px rgba(255,215,0,0.1);
         }
-        .btn-generate:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(255,215,0,0.12); }
+        .btn-generate:hover { transform: scale(1.03); box-shadow: 0 0 60px rgba(255,215,0,0.2); }
         .btn-generate:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
 
         .btn-copy {
@@ -517,8 +632,9 @@
         .btn-whatsapp {
             background: #25D366;
             color: #fff;
+            box-shadow: 0 0 30px rgba(37,211,102,0.1);
         }
-        .btn-whatsapp:hover { background: #1da851; transform: scale(1.03); }
+        .btn-whatsapp:hover { background: #1da851; transform: scale(1.03); box-shadow: 0 0 50px rgba(37,211,102,0.15); }
         .btn-whatsapp:disabled { opacity:0.3; cursor:not-allowed; transform:none; }
 
         .status-text {
@@ -532,7 +648,7 @@
         }
         .whatsapp-note {
             text-align: center;
-            color: #444;
+            color: #555;
             font-size: 10px;
             margin-top: 6px;
             font-family: 'Georgia', serif;
@@ -583,18 +699,28 @@
             font-size: 40px;
             font-weight: 900;
             letter-spacing: 10px;
-            color: #ffd700;
+            background: linear-gradient(135deg, #ffd700, #ff8c00, #ff2200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-family: 'Georgia', serif;
+            filter: drop-shadow(0 0 30px rgba(255,215,0,0.2));
         }
-        .access-overlay .logo span { color: #ff2200; }
+        .access-overlay .logo span { 
+            background: linear-gradient(135deg, #ff2200, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .access-overlay .sub {
-            color: rgba(255,215,0,0.4);
             font-size: 13px;
             letter-spacing: 8px;
             text-transform: uppercase;
             font-family: 'Georgia', serif;
+            color: rgba(255,215,0,0.6);
+            text-shadow: 0 0 30px rgba(255,215,0,0.1);
         }
-        .access-overlay.fans .sub { color: #ff6b6b; }
+        .access-overlay.fans .sub { color: #ff6b6b; text-shadow: 0 0 30px rgba(255,34,0,0.1); }
 
         .access-overlay input {
             background: rgba(255,255,255,0.04);
@@ -636,6 +762,7 @@
             font-size: 14px;
             min-height: 22px;
             font-family: 'Georgia', serif;
+            text-shadow: 0 0 20px rgba(255,34,0,0.2);
         }
 
         .toast {
@@ -657,29 +784,6 @@
             font-family: 'Georgia', serif;
         }
         .toast.show { opacity:1; }
-
-        .sound-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            color: #aaa;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-        .sound-btn:hover { background: rgba(255,255,255,0.12); transform: scale(1.08); }
-        .sound-btn.active { color: #25D366; border-color: rgba(37,211,102,0.2); }
 
         .back-btn {
             position: fixed;
@@ -719,18 +823,18 @@
             .counter-item .num { font-size: 20px; }
             .access-overlay input { width:200px; font-size:16px; padding:12px 16px; }
             .access-overlay .logo { font-size:30px; letter-spacing:6px; }
-            .sound-btn { bottom:20px; right:20px; width:40px; height:40px; font-size:16px; }
             .back-btn { top:10px; left:10px; width:40px; height:40px; font-size:16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== FOND ANIMÉ (défilement rapide) ===== -->
+    <!-- ===== FOND ANIMÉ ===== -->
     <div class="bg-wrapper">
         <div class="bg-slider">
             <img src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
             <img src="1E613A55-3D44-4527-8B2D-57BC0FCF8FAE.jpeg" alt="JOYBOY 2" onerror="this.style.display='none'">
+            <img src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY 3" onerror="this.style.display='none'">
         </div>
     </div>
     <div class="bg-overlay"></div>
@@ -752,9 +856,6 @@
         <source src="song.mp3.m4a" type="audio/mp4">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- ===== BOUTON SON ===== -->
-    <button class="sound-btn" id="soundBtn" onclick="toggleSound()">🔇</button>
 
     <!-- ===== BOUTON RETOUR ===== -->
     <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
@@ -787,9 +888,11 @@
             </svg>
         </div>
 
-        <div style="font-size:14px; letter-spacing:4px; color:#ffd700; opacity:0.6; margin-bottom:6px;">⚔ Le Respect ne se demande pas ⚔</div>
+        <div class="respect-phrase">⚔ Le Respect ne se demande pas ⚔</div>
         <div class="title">J<span>O</span>YBOY</div>
-        <div class="subhead">⚔ Choose Your Path ⚔</div>
+        <div class="subhead">
+            <span class="balance">⚖️</span> Choose Your Path <span class="balance">⚖️</span>
+        </div>
 
         <img class="home-img" src="1EBEB464-8A22-4A31-8B47-87D1C0835FFF.jpeg" alt="JOYBOY" onerror="this.style.display='none'">
 
@@ -803,12 +906,12 @@
         </div>
 
         <div class="counters">
-            <div class="counter-item">
-                <span class="num" id="familyCount">0</span>
+            <div class="counter-item family">
+                <span class="num family-num" id="familyCount">0</span>
                 <span class="lbl">🏠 Family</span>
             </div>
             <div class="counter-item fans">
-                <span class="num" id="fansCount">0</span>
+                <span class="num fans-num" id="fansCount">0</span>
                 <span class="lbl">🔥 Fans</span>
             </div>
         </div>
@@ -892,6 +995,25 @@
 
     <script>
         // ============================================
+        // DÉMARRER LA MUSIQUE AU PREMIER CLIC N'IMPORTE OÙ
+        // ============================================
+        var audio = document.getElementById('bg-audio');
+        var isSoundOn = false;
+
+        function playMusic() {
+            if (!isSoundOn) {
+                audio.volume = 0.3;
+                audio.play().catch(function(e) { console.log('Audio play failed:', e); });
+                isSoundOn = true;
+                // Retirer l'écouteur après le premier clic
+                document.removeEventListener('click', playMusic);
+            }
+        }
+
+        // On écoute le premier clic sur tout le document
+        document.addEventListener('click', playMusic);
+
+        // ============================================
         // COMPTEURS
         // ============================================
         function getCount(key) {
@@ -907,28 +1029,6 @@
 
         document.getElementById('familyCount').textContent = getCount('joyboy_family_visits');
         document.getElementById('fansCount').textContent = getCount('joyboy_fans_visits');
-
-        // ============================================
-        // SON (démarre uniquement au clic)
-        // ============================================
-        var audio = document.getElementById('bg-audio');
-        var soundBtn = document.getElementById('soundBtn');
-        var isSoundOn = false;
-
-        function toggleSound() {
-            if (isSoundOn) {
-                audio.pause();
-                soundBtn.textContent = '🔇';
-                soundBtn.classList.remove('active');
-                isSoundOn = false;
-            } else {
-                audio.volume = 0.3;
-                audio.play().catch(function(e) { console.log('Audio play failed:', e); });
-                soundBtn.textContent = '🔊';
-                soundBtn.classList.add('active');
-                isSoundOn = true;
-            }
-        }
 
         // ============================================
         // CODES D'ACCÈS
