@@ -43,8 +43,8 @@
             width: 50%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.45;
-            filter: brightness(0.7) saturate(1.1);
+            opacity: 0.85;        /* plus clair */
+            filter: brightness(1.1) saturate(1.1); /* plus lumineux */
             flex-shrink: 0;
         }
 
@@ -57,7 +57,7 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
             pointer-events: none;
         }
 
@@ -1049,17 +1049,6 @@
             var numero = document.getElementById('numero').value.trim();
             var details = document.getElementById('details').value.trim();
             var type = document.getElementById('type').value;
-
-            var typeLabels = {
-                harassment: "harassment and bullying",
-                scam: "scam and fraud",
-                identity: "identity theft",
-                illegal: "illegal content",
-                threats: "threats and violence",
-                impersonation: "impersonation",
-                doxxing: "doxxing and sharing private information",
-                other: "serious violations"
-            };
 
             var familyMessages = [
                 "Dear WhatsApp Support Team,\n\nI am writing to you today with a heavy heart because my family is going through something terrible. A person on WhatsApp has been sending threatening messages to my wife and children. They have been insulting them, making them feel unsafe, and even threatening to harm them. My children are scared to even open the app now. This person knows our personal information and is using it to intimidate us.\n\nI have tried blocking them but they keep creating new accounts. I've reported them before but nothing changed. I am genuinely scared for my family's safety. We are not sleeping well. My wife is stressed, my kids are anxious, and I feel helpless because I can't stop this person.\n\nI am asking you, from the bottom of my heart, to please investigate this account and ban it permanently. I have screenshots of everything — the threats, the insults, the harassment. I can share all of it if needed. Please don't let this person continue to terrorize my family.\n\nThank you for reading this. I hope you can help us find peace again.\n\nSincerely,\nA father who just wants to protect his family",
