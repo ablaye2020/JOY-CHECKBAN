@@ -1,13 +1,8 @@
 // ============================================
-// CONFIGURATION - AVEC PROXY CORS
+// CONFIGURATION
 // ============================================
-
-// Option 1: Utiliser un proxy CORS public
-const PROXY_URL = 'https://corsproxy.io/?';
-// Option 2: Alternative si le premier ne fonctionne pas
-// const PROXY_URL = 'https://api.allorigins.win/raw?url=';
-
-const API_URL = 'https://baron0.com/free';
+// L'URL CORRECTE de l'API baron0
+const API_URL = 'https://baron0.com/api/check';
 
 // ============================================
 // ÉLÉMENTS DOM
@@ -47,7 +42,7 @@ function formatPhoneNumber(number) {
 }
 
 // ============================================
-// ✅ VÉRIFIER UN NUMÉRO - AVEC PROXY CORS
+// ✅ VÉRIFIER UN NUMÉRO - APPEL API CORRECT
 // ============================================
 async function checkNumber(number) {
     try {
@@ -55,22 +50,24 @@ async function checkNumber(number) {
         
         console.log(`📞 Vérification de: ${formattedNumber}`);
         
-        // Construction de l'URL avec proxy
-        const targetUrl = `${API_URL}?number=${encodeURIComponent(formattedNumber)}`;
-        const proxyUrl = `${PROXY_URL}${encodeURIComponent(targetUrl)}`;
-        
-        console.log('🔗 URL avec proxy:', proxyUrl);
-        
-        // Appel via le proxy
-        const response = await fetch(proxyUrl, {
-            method: 'GET',
+        // ============================================
+        // APPEL DIRECT À L'API BARON0
+        // ============================================
+        const response = await fetch(API_URL, {
+            method: 'POST',
             headers: {
-                'Accept': 'application/json'
-            }
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Origin': 'https://baron0.com',
+                'Referer': 'https://baron0.com/free'
+            },
+            body: JSON.stringify({
+                number: formattedNumber
+            })
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            throw new Error(`HTTP ${response.status}`);
         }
 
         const data = await response.json();
@@ -82,45 +79,45 @@ async function checkNumber(number) {
         let isExcluded = false;
         let reason = '';
         let banTime = '';
+        let appealTime = '';
         
-        // Vérifier différents formats de réponse possibles
-        if (data.status === 'banned' || data.status === 'excluded' || data.status === 'blocked') {
+        // Format de réponse de baron0
+        if (data.status === 'banned' || data.status === 'excluded') {
             isExcluded = true;
+            reason = data.reason || 'Banni';
+            banTime = data.ban_time || data.date || '';
+            appealTime = data.appeal_time || '';
         }
         
         if (data.excluded === true || data.blocked === true) {
             isExcluded = true;
+            reason = data.reason || data.message || 'Banni';
         }
         
-        if (data.isExcluded === true || data.isBlocked === true) {
-            isExcluded = true;
-        }
-        
-        // Chercher la raison
-        reason = data.reason || data.message || data.msg || '';
-        banTime = data.ban_time || data.date || data.time || '';
-        
-        // Si la réponse est un texte simple
-        if (typeof data === 'string') {
-            if (data.toLowerCase().includes('banned') || 
-                data.toLowerCase().includes('excluded') ||
-                data.toLowerCase().includes('blocked')) {
-                isExcluded = true;
-                reason = data;
-            }
+        // Si le statut est "active" ou "valid"
+        if (data.status === 'active' || data.status === 'valid' || data.status === 'clean') {
+            isExcluded = false;
         }
 
-        console.log(`✅ Résultat pour ${formattedNumber}: ${isExcluded ? 'EXCLU' : 'VALIDE'}`);
+        // Si c'est un message direct
+        if (typeof data === 'object' && data.message) {
+            if (data.message.toLowerCase().includes('banned') || 
+                data.message.toLowerCase().includes('excluded')) {
+                isExcluded = true;
+                reason = data.message;
+            }
+        }
 
         return {
             number: formattedNumber,
             isExcluded: isExcluded,
             status: isExcluded ? 'excluded' : 'valid',
             message: isExcluded 
-                ? `🚫 ${reason || 'Banni'} ${banTime ? '| 📅 '+banTime : ''}` 
+                ? `🚫 ${reason} ${banTime ? '| 📅 '+banTime : ''}` 
                 : '✅ Numéro actif',
             reason: reason,
             banTime: banTime,
+            appealTime: appealTime,
             rawData: data
         };
 
@@ -163,7 +160,6 @@ async function checkAllNumbers() {
     results = [];
     resultsList.innerHTML = '';
     
-    // Afficher les statuts de chargement
     rawNumbers.forEach((num, index) => {
         const item = document.createElement('div');
         item.className = 'result-item loading';
@@ -175,14 +171,11 @@ async function checkAllNumbers() {
         resultsList.appendChild(item);
     });
     
-    // Vérifier chaque numéro
     for (let i = 0; i < rawNumbers.length; i++) {
         const result = await checkNumber(rawNumbers[i]);
         results.push(result);
         updateResultItem(i, result);
         updateStats();
-        
-        // Petit délai pour ne pas surcharger l'API
         await new Promise(resolve => setTimeout(resolve, 500));
     }
     
@@ -209,11 +202,11 @@ function updateResultItem(index, result) {
         extraInfo = `
             <div style="font-size:0.8rem;color:#ff6b6b;margin-top:5px;">
                 ⚠️ ${result.reason} ${result.banTime ? '| 📅 '+result.banTime : ''}
+                ${result.appealTime ? '| 📅 Appel: '+result.appealTime : ''}
             </div>
         `;
     }
     
-    // Afficher les données brutes pour déboguer
     if (result.rawData) {
         const rawStr = JSON.stringify(result.rawData);
         extraInfo += `
@@ -308,5 +301,4 @@ clearAll();
 
 console.log('☠️ Joy Boy Checker chargé !');
 console.log('🔗 API URL:', API_URL);
-console.log('🔄 Proxy CORS activé');
 console.log('💡 Entrez un numéro et cliquez sur VÉRIFIER');
