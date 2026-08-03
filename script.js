@@ -1,6 +1,12 @@
 // ============================================
-// CONFIGURATION
+// CONFIGURATION - AVEC PROXY CORS
 // ============================================
+
+// Option 1: Utiliser un proxy CORS public
+const PROXY_URL = 'https://corsproxy.io/?';
+// Option 2: Alternative si le premier ne fonctionne pas
+// const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+
 const API_URL = 'https://baron0.com/free';
 
 // ============================================
@@ -41,7 +47,7 @@ function formatPhoneNumber(number) {
 }
 
 // ============================================
-// ✅ VÉRIFIER UN NUMÉRO - VERSION SIMPLIFIÉE
+// ✅ VÉRIFIER UN NUMÉRO - AVEC PROXY CORS
 // ============================================
 async function checkNumber(number) {
     try {
@@ -49,57 +55,30 @@ async function checkNumber(number) {
         
         console.log(`📞 Vérification de: ${formattedNumber}`);
         
-        // Essayer différentes méthodes
-        let response;
-        let data;
+        // Construction de l'URL avec proxy
+        const targetUrl = `${API_URL}?number=${encodeURIComponent(formattedNumber)}`;
+        const proxyUrl = `${PROXY_URL}${encodeURIComponent(targetUrl)}`;
         
-        // Méthode 1: POST avec FormData
-        try {
-            const formData = new FormData();
-            formData.append('number', formattedNumber);
-            
-            response = await fetch(API_URL, {
-                method: 'POST',
-                body: formData
-            });
-            
-            data = await response.json();
-            console.log('📡 Réponse (POST FormData):', data);
-        } catch (error1) {
-            console.log('❌ Méthode 1 échouée, essai méthode 2...');
-            
-            // Méthode 2: POST avec JSON
-            try {
-                response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        number: formattedNumber
-                    })
-                });
-                
-                data = await response.json();
-                console.log('📡 Réponse (POST JSON):', data);
-            } catch (error2) {
-                console.log('❌ Méthode 2 échouée, essai méthode 3...');
-                
-                // Méthode 3: GET avec paramètre
-                response = await fetch(`${API_URL}?number=${formattedNumber}`, {
-                    method: 'GET'
-                });
-                
-                data = await response.json();
-                console.log('📡 Réponse (GET):', data);
+        console.log('🔗 URL avec proxy:', proxyUrl);
+        
+        // Appel via le proxy
+        const response = await fetch(proxyUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
             }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
+
+        const data = await response.json();
+        console.log('📡 Réponse API:', data);
 
         // ============================================
         // ANALYSER LA RÉPONSE
         // ============================================
-        
-        // Essayer de trouver si le numéro est exclu
         let isExcluded = false;
         let reason = '';
         let banTime = '';
@@ -142,7 +121,7 @@ async function checkNumber(number) {
                 : '✅ Numéro actif',
             reason: reason,
             banTime: banTime,
-            rawData: data // Pour déboguer
+            rawData: data
         };
 
     } catch (error) {
@@ -204,7 +183,7 @@ async function checkAllNumbers() {
         updateStats();
         
         // Petit délai pour ne pas surcharger l'API
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 500));
     }
     
     isChecking = false;
@@ -236,9 +215,10 @@ function updateResultItem(index, result) {
     
     // Afficher les données brutes pour déboguer
     if (result.rawData) {
+        const rawStr = JSON.stringify(result.rawData);
         extraInfo += `
             <div style="font-size:0.7rem;color:#665544;margin-top:3px;word-break:break-all;">
-                📦 ${JSON.stringify(result.rawData).substring(0, 100)}
+                📦 ${rawStr.substring(0, 150)}${rawStr.length > 150 ? '...' : ''}
             </div>
         `;
     }
@@ -328,4 +308,5 @@ clearAll();
 
 console.log('☠️ Joy Boy Checker chargé !');
 console.log('🔗 API URL:', API_URL);
+console.log('🔄 Proxy CORS activé');
 console.log('💡 Entrez un numéro et cliquez sur VÉRIFIER');
