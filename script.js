@@ -1,8 +1,7 @@
 // ============================================
-// CONFIGURATION
+// CONFIGURATION - UTILISE VOTRE SERVEUR
 // ============================================
-// L'URL CORRECTE de l'API baron0
-const API_URL = 'https://baron0.com/api/check';
+const API_URL = 'http://localhost:3000/check'; // ← Votre serveur local
 
 // ============================================
 // ÉLÉMENTS DOM
@@ -42,24 +41,21 @@ function formatPhoneNumber(number) {
 }
 
 // ============================================
-// ✅ VÉRIFIER UN NUMÉRO - APPEL API CORRECT
+// ✅ VÉRIFIER UN NUMÉRO - APPEL À VOTRE SERVEUR
 // ============================================
 async function checkNumber(number) {
     try {
         const formattedNumber = formatPhoneNumber(number);
         
         console.log(`📞 Vérification de: ${formattedNumber}`);
-        
-        // ============================================
-        // APPEL DIRECT À L'API BARON0
-        // ============================================
+        console.log(`🔗 Appel à: ${API_URL}`);
+
+        // ✅ Appel à VOTRE serveur (pas de CORS)
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Origin': 'https://baron0.com',
-                'Referer': 'https://baron0.com/free'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 number: formattedNumber
@@ -67,58 +63,22 @@ async function checkNumber(number) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Erreur HTTP: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('📡 Réponse API:', data);
-
-        // ============================================
-        // ANALYSER LA RÉPONSE
-        // ============================================
-        let isExcluded = false;
-        let reason = '';
-        let banTime = '';
-        let appealTime = '';
-        
-        // Format de réponse de baron0
-        if (data.status === 'banned' || data.status === 'excluded') {
-            isExcluded = true;
-            reason = data.reason || 'Banni';
-            banTime = data.ban_time || data.date || '';
-            appealTime = data.appeal_time || '';
-        }
-        
-        if (data.excluded === true || data.blocked === true) {
-            isExcluded = true;
-            reason = data.reason || data.message || 'Banni';
-        }
-        
-        // Si le statut est "active" ou "valid"
-        if (data.status === 'active' || data.status === 'valid' || data.status === 'clean') {
-            isExcluded = false;
-        }
-
-        // Si c'est un message direct
-        if (typeof data === 'object' && data.message) {
-            if (data.message.toLowerCase().includes('banned') || 
-                data.message.toLowerCase().includes('excluded')) {
-                isExcluded = true;
-                reason = data.message;
-            }
-        }
+        console.log('📡 Réponse du serveur:', data);
 
         return {
-            number: formattedNumber,
-            isExcluded: isExcluded,
-            status: isExcluded ? 'excluded' : 'valid',
-            message: isExcluded 
-                ? `🚫 ${reason} ${banTime ? '| 📅 '+banTime : ''}` 
-                : '✅ Numéro actif',
-            reason: reason,
-            banTime: banTime,
-            appealTime: appealTime,
-            rawData: data
+            number: data.number || formattedNumber,
+            isExcluded: data.isExcluded || false,
+            status: data.status || (data.isExcluded ? 'excluded' : 'valid'),
+            message: data.message || (data.isExcluded ? '🚫 Exclu' : '✅ Valide'),
+            reason: data.reason || '',
+            banTime: data.banTime || null,
+            appealTime: data.appealTime || null,
+            rawData: data.rawData || null
         };
 
     } catch (error) {
@@ -132,6 +92,12 @@ async function checkNumber(number) {
         };
     }
 }
+
+// ============================================
+// LE RESTE DU CODE EST IDENTIQUE
+// ============================================
+// (Gardez toutes les autres fonctions inchangées)
+// checkAllNumbers(), updateResultItem(), updateStats(), etc.
 
 // ============================================
 // VÉRIFIER TOUS LES NUMÉROS
@@ -176,7 +142,7 @@ async function checkAllNumbers() {
         results.push(result);
         updateResultItem(i, result);
         updateStats();
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 300));
     }
     
     isChecking = false;
@@ -203,15 +169,6 @@ function updateResultItem(index, result) {
             <div style="font-size:0.8rem;color:#ff6b6b;margin-top:5px;">
                 ⚠️ ${result.reason} ${result.banTime ? '| 📅 '+result.banTime : ''}
                 ${result.appealTime ? '| 📅 Appel: '+result.appealTime : ''}
-            </div>
-        `;
-    }
-    
-    if (result.rawData) {
-        const rawStr = JSON.stringify(result.rawData);
-        extraInfo += `
-            <div style="font-size:0.7rem;color:#665544;margin-top:3px;word-break:break-all;">
-                📦 ${rawStr.substring(0, 150)}${rawStr.length > 150 ? '...' : ''}
             </div>
         `;
     }
